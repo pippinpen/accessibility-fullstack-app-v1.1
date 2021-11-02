@@ -31,13 +31,14 @@ export const AuthProvider = (props) => {
   const [accessToken, setAccessToken] = useState(null);
 
   useEffect(() => {
+    console.log("AT", accessToken);
     const getToken = async () => {
       console.log("gettng AT", `http://${domain}/api/v1`);
       try {
         const Acctoken = await getAccessTokenSilently();
-        console.log("GOT AT", Acctoken);
+        console.log("SETTING AT", Acctoken);
         setAccessToken(Acctoken);
-        console.log("afterSet", accessToken);
+        // console.log("afterSet", accessToken);
       } catch (err) {
         console.log("getAccessTokenSilently err", err);
         if (
