@@ -1,0 +1,41 @@
+{
+  "name": "accessibility_app_1.1",
+  "version": "1.1.0",
+  "description": "A MERN (MongoDB, Express, React and Node) app to make your class, event or party more accessible, so everyone can make the most it",
+  "main": "index.js",
+  "dependencies": {
+    "concurrently": "^6.3.0",
+    "rimraf": "^3.0.2",
+    "yarn": "^1.22.17"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "setup": "concurrently --kill-others-on-fail  \"cd server && yarn\" \"cd client && yarn --network-concurrency 1\"",
+    "client:build": "cd client && yarn build && rimraf client/src",
+    "client:dev": "cd client && yarn start",
+    "server:dev": "cd server && yarn start:dev",
+    "server:dev:test": "cd server && yarn start:dev:test",
+    "dev": "concurrently --kill-others-on-fail \"yarn server:dev\" \"yarn client:dev\"",
+    "client:test": "cd client && yarn test",
+    "server:test": "cd server && yarn test --detectOpenHandles",
+    "test": "concurrently --kill-others-on-fail \"yarn server:test\" \"yarn client:test\"",
+    "test:e2e:dev": "concurrently --kill-others-on-fail \"yarn dev\" \"npx cypress open --config-file cypress.dev.json\"",
+    "test:e2e:prod": "concurrently --kill-others-on-fail \"yarn start\" \"npx cypress open --config-file cypress.prod.json \"",
+    "client": "cd client && yarn build",
+    "server": "cd server && yarn start",
+    "build": "yarn setup && yarn client:build",
+    "heroku-postbuild": "rimraf ./cypress && yarn build",
+    "start": "yarn server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pippinpen/accessibility-fullstack-app-v1.1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pippinpen/accessibility-fullstack-app-v1.1/issues"
+  },
+  "homepage": "https://github.com/pippinpen/accessibility-fullstack-app-v1.1#readme"
+}
