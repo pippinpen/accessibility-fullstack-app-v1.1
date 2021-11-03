@@ -39,10 +39,10 @@ router
   .put("/:id", checkJwt, updateOwnEvent)
   .delete("/:id", checkJwt, removeOwnEvent)
   // Admin
-  .get("/:id?", logToken, checkJwt, getEvents)
-  .post("/", logToken, checkJwt, addEvent)
-  .put("/:id", checkJwt, updateEvent)
-  .delete("/:id", checkJwt, removeEvent);
+  // .get("/:id?", logToken, checkJwt, getEvents)
+  // .post("/", logToken, checkJwt, addEvent)
+  // .put("/:id", checkJwt, updateEvent)
+  // .delete("/:id", checkJwt, removeEvent);
 
 module.exports = router;
 
