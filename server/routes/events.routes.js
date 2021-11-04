@@ -4,29 +4,29 @@ const logger = require("../logger");
 const router = express.Router();
 
 const {
-  getEvents,
-  addEvent,
-  updateEvent,
-  removeEvent,
+  // getEvents,
+  // addEvent,
+  // updateEvent,
+  // removeEvent,
   getOwnEvent,
   addOwnEvent,
   updateOwnEvent,
   removeOwnEvent,
 } = require("../controllers/event.controller.js");
 
-const { checkPermissions } = require("../middleware/permissions.middleware");
+// const { checkPermissions } = require("../middleware/permissions.middleware");
 const { checkJwt } = require("../middleware/authz.middleware");
 
-const {
-  CreateEvents,
-  DeleteEvents,
-  ReadEvents,
-  UpdateEvents,
-  CreateOwnEvent,
-  DeleteOwnEvent,
-  ReadOwnEvent,
-  UpdateOwnEvent,
-} = require("../constants").EventPermission;
+// const {
+//   CreateEvents,
+//   DeleteEvents,
+//   ReadEvents,
+//   UpdateEvents,
+//   CreateOwnEvent,
+//   DeleteOwnEvent,
+//   ReadOwnEvent,
+//   UpdateOwnEvent,
+// } = require("../constants").EventPermission;
 
 const logToken = (req, res, next) => {
   logger.info(`headers: ${req.headers}`);
