@@ -2,11 +2,11 @@ import React, { useContext, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Button,
-  TextField,
-  Select,
-  MenuItem,
+  // TextField,
+  // Select,
+  // MenuItem,
   FormControl,
-  InputLabel,
+  // InputLabel,
   RadioGroup,
   FormLabel,
   FormControlLabel,
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const schema = yup.object().shape({
-  venue: yup.boolean().required(),
+  venue: yup.string().required(),
   // materials: yup.boolean().required(),
   // food: yup.boolean().required(),
   // drink: yup.boolean().required(),
@@ -52,7 +52,7 @@ function EventForm({ initialValues }) {
   const [populated, setPopulated] = useState(false);
 
   const defaultValues = {
-    venue: true,
+    venue: "online",
     // materials: true,
     // food: true,
     // drink: true,
@@ -103,13 +103,15 @@ function EventForm({ initialValues }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={classes.formrow}>
-        <FormLabel component='legend'>Will your event be online or in-person?</FormLabel>
           <Controller
             render={(
               { onChange, onBlur, value, name, ref },
               { invalid, isTouched, isDirty }
             ) => (
+              <FormControl component="fieldset">
+              <FormLabel component='legend'>Will your event be online or in-person?</FormLabel>
               <RadioGroup
+                row
                 inputRef={ref}
                 value={value}
                 onChange={onChange}
@@ -118,12 +120,14 @@ function EventForm({ initialValues }) {
                 helperText={errors.venue?.message}
                 id="venue"
                 name={name}
-                label="venue"
+                aria-label="venue"
+                // defaultValue="online"
               >
-                <FormControlLabel value="false" control={<Radio/>} label="Online"/>
-                <FormControlLabel value="true" control={<Radio/>} label="In-person"/>
-                <FormControlLabel value="true" control={<Radio/>} label="Both"/>
+                <FormControlLabel value="online" control={<Radio/>} label="Online"/>
+                <FormControlLabel value="inPerson" control={<Radio/>} label="In-person"/>
+                <FormControlLabel value="both" control={<Radio/>} label="Both"/>
               </RadioGroup>
+              </FormControl>
             )}
             name="venue"
             control={control}

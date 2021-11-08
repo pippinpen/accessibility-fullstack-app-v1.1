@@ -2,7 +2,7 @@ import configJson from "./auth_config.json";
 
 export function getConfig() {
   const audience =
-    configJson.audience && configJson.audience !== "https://dev-kabxz7i1.us.auth0.com/api/v2/"
+    configJson.audience && configJson.audience !== "YOUR_API_IDENTIFIER"
       ? configJson.audience
       : null;
 

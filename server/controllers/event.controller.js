@@ -1,4 +1,5 @@
 const Event = require('../models/event/event.model');
+const FormConfig = require('../models/event/event.model');
 const { errorHandler } = require('./utils');
 const logger = require('../logger');
 

@@ -1,5 +1,5 @@
 {
   "domain": "dev-kabxz7i1.us.auth0.com",
   "clientId": "LLQvvEUmzGpf71daeco7MMd0X5Lmw2b2",
-  "audience": "https://dev-kabxz7i1.us.auth0.com/api/v2/"
+  "audience": "http://localhost:5000/api/v1/events/"
 }

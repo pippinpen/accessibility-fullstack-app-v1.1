@@ -48,7 +48,7 @@ const Schema = mongoose.Schema;
 
 const formConfigSchema = new Schema({
   venue: {
-    type: Boolean,
+    type: String,
     required: true,
   },
 });
@@ -67,4 +67,7 @@ const eventSchema = new Schema({
 });
 
 const Event = mongoose.model('Event', eventSchema);
-module.exports = Event;
+module.exports = {
+  Event,
+  FormConfig
+};
