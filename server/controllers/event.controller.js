@@ -1,5 +1,5 @@
 const Event = require('../models/event/event.model');
-const FormConfig = require('../models/event/event.model');
+const FormConfig = require('../models/formConfig/formConfig.model');
 const { errorHandler } = require('./utils');
 const logger = require('../logger');
 
@@ -21,13 +21,13 @@ exports.getEvents = function (req, res) {
 
 exports.getOwnEvent = function (req, res) {
   let query = {
-    customerID: req.event.sub,
+    customerID: req.user.sub,
   };
   if (req.params.id) {
     query._id = req.params.id;
   }
   Event.find(query)
-    // .populate('items')
+    .populate('formConfig')
     .exec((err, eventData) => {
       // if (err) return errorHandler(res, err);
       if (err) return console.log(res, err);
@@ -48,13 +48,30 @@ exports.addEvent = function (req, res) {
 };
 
 exports.addOwnEvent = function (req, res) {
-  const eventData = { ...req.body, customerID: req.event.sub };
-  logger.info(`eventData ${eventData}`);
-  const newEvent = new Event(eventData);
-  newEvent.save((err, event) => {
+  const eventData = req.body;
+  console.log(`eventData ${JSON.stringify(eventData)}`);
+  const formConfig = new FormConfig(req.body);
+  formConfig.save((err, record) => {
+    console.log("formConfig", formConfig);
     if (err) return errorHandler(res, err);
-    return res.status(201).json(event);
+    const newEvent = new Event({
+      customerID: req.user.sub,
+      formConfig: record._id,
+    });
+    newEvent.save((err, event) => {
+      if (err) return errorHandler(res, err);
+      console.log("event", event);
+      return res.status(201).json(event);
+    });
   });
+  
+  // const eventData = { ...req.body, customerID: req.event.sub };
+  // logger.info(`eventData ${eventData}`);
+  // const newEvent = new Event(eventData);
+  // newEvent.save((err, event) => {
+  //   if (err) return errorHandler(res, err);
+  //   return res.status(201).json(event);
+  // });
 };
 
 exports.updateEvent = function (req, res) {

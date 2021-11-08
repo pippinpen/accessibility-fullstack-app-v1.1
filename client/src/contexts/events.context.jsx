@@ -125,7 +125,7 @@ export const EventsProvider = (props) => {
         });
       } catch (err) {
         console.log(err);
-        setState(err);
+        setError(err);
         addToast(`Error ${err.message || err.statusText}`, {
           appearance: "error",
         });
