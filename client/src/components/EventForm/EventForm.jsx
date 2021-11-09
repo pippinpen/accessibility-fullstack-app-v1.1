@@ -1,8 +1,12 @@
 import React, { useContext, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
+  KeyboardDatePicker,
+  MuiPickersUtilsProvider
+} from "@material-ui/pickers";
+import {
   Button,
-  // TextField,
+  TextField,
   // Select,
   // MenuItem,
   FormControl,
@@ -16,15 +20,21 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, Controller } from "react-hook-form";
 import * as yup from "yup";
 import { useParams } from "react-router-dom";
+// import ReactDatePicker from "react-datepicker";
+import DateFnsUtils from "@date-io/date-fns";
+import "react-datepicker/dist/react-datepicker.css";
+// import "../EventForm/EventForm.css";
+
 
 import { EventsContext } from './../../contexts/events.context';
+
 
 const useStyles = makeStyles((theme) => ({
   button: {
     margin: theme.spacing(1),
   },
   formRow: {
-    margin: theme.spacing(1),
+    margin: theme.spacing(2),
     minWidth: 120,
     display: "flex",
     justifyContent: "center",
@@ -39,8 +49,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const schema = yup.object().shape({
+  title: yup.string().required(),
+  date: yup.string().required(),
   venue: yup.string().required(),
-  // materials: yup.boolean().required(),
+  materials: yup.string().required(),
   // food: yup.boolean().required(),
   // drink: yup.boolean().required(),
   // customQuestions: yup.string().required(),
@@ -52,8 +64,10 @@ function EventForm({ initialValues }) {
   const [populated, setPopulated] = useState(false);
 
   const defaultValues = {
-    venue: "online",
-    // materials: true,
+    title: "",
+    date: new Date(),
+    venue: "",
+    materials: "",
     // food: true,
     // drink: true,
     // customQuestions: "",
@@ -83,7 +97,7 @@ function EventForm({ initialValues }) {
     console.log("formValues", formValues);
     // formValues._id = id; // pulled from the URL using router 'useParams' hook
 
-    if (populated) {
+    if (populated) { 
       const updates = {};
       for (const key in initialValues) {
         if (initialValues.hasOwnProperty(key)) {
@@ -103,6 +117,92 @@ function EventForm({ initialValues }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={classes.formrow}>
+        <label>What's the name of your event?</label>
+        <Controller
+          render={(
+            { onChange, onBlur, value, name, ref },
+            { invalid, isTouched, isDirty }
+          ) => (
+            <TextField
+              inputRef={ref}
+              value={value}
+              onChange={onChange}
+              onBlur={onBlur}
+              error={!!errors.title}
+              helperText={errors.title?.message}
+              id="title"
+              name={name}
+              // placeholder="fff"
+              label="Event Name"
+            />
+          )}
+          name="title"
+          control={control}
+          rules={{ required: true }}
+        />
+      </div>
+      {/* <div className={classes.formrow}>
+        <label>What date will your event take place?</label>
+        <Controller
+          render={(
+            { onChange, onBlur, value, ref },
+            { invalid, isTouched, isDirty }
+          ) => (
+            <ReactDatePicker
+              onChange={onChange}
+              onBlur={onBlur}
+              inputRef={ref}
+              selected={value}
+              // name={name}
+              error={!!errors.date}
+              helperText={errors.date?.message}
+              // id="date"
+              placeholderText="Select date"
+              // label="Event Date"
+              className="input"
+              dateFormat="dd/MM/yyyy"
+
+            />
+          )}
+          name="date"
+          control={control}
+          // rules={{ required: true }}
+        />
+      </div> */}
+      <div className={classes.formrow}>
+        <label>When will your event take place?</label>
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <Controller
+          render={(
+            { onChange, onBlur, value,  ref },
+            { invalid, isTouched, isDirty }
+          ) => (
+            <KeyboardDatePicker
+              onChange={onChange}
+              onBlur={onBlur}
+              inputRef={ref}
+              selected={value}
+              error={!!errors.date}
+              helperText={errors.date?.message}
+              id="date"
+              placeholderText="Select date"
+              label="Event Date"
+              className="input"
+              format="dd/MM/yyyy"
+              margin="normal"
+              KeyboardButtonProps={{
+                "aria-label": "change date"
+              }}
+            />
+          )}
+          name="date"
+          control={control}
+          // rules={{ required: true }}
+        />
+        </MuiPickersUtilsProvider>
+      </div>
+      <div className={classes.formrow}>
+        <label>Will your event be online or in-person?</label>
           <Controller
             render={(
               { onChange, onBlur, value, name, ref },
@@ -130,6 +230,37 @@ function EventForm({ initialValues }) {
               </FormControl>
             )}
             name="venue"
+            control={control}
+            rules={{ required: true }}
+          />
+      </div>
+      <div className={classes.formrow}>
+        <label>Will you have presenting materials you can share with participants?</label>
+          <Controller
+            render={(
+              { onChange, onBlur, value, name, ref },
+              { invalid, isTouched, isDirty }
+            ) => (
+              <FormControl component="fieldset">
+              <FormLabel component='legend'>Will you have presenting materials you can share with participants?</FormLabel>
+              <RadioGroup
+                row
+                inputRef={ref}
+                value={value}
+                onChange={onChange}
+                onBlur={onBlur}
+                error={!!errors.materials}
+                helperText={errors.materials?.message}
+                id="materials"
+                name={name}
+                aria-label="materials"
+              >
+                <FormControlLabel value="yesMaterials" control={<Radio/>} label="Yes"/>
+                <FormControlLabel value="noMaterials" control={<Radio/>} label="No"/>
+              </RadioGroup>
+              </FormControl>
+            )}
+            name="materials"
             control={control}
             rules={{ required: true }}
           />

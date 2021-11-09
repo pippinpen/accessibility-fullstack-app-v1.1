@@ -131,7 +131,7 @@ export const EventsProvider = (props) => {
         });
       }
     },
-    [accessToken, addToast, setLoading, setEvents, state]
+    [accessToken, addToast, setLoading, setError,setEvents, state]
   );
 
   const updateEvent = useCallback(
