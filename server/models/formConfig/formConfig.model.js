@@ -2,7 +2,23 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const formConfigSchema = new Schema({
+  title: {
+    type: String,
+    required: true,
+  },
+  date: {
+    type: Date,
+    required: true,
+  },
   venue: {
+    type: String,
+    required: true,
+  },
+  materials: {
+    type: String,
+    required: true,
+  },
+  foodDrink: {
     type: String,
     required: true,
   },

@@ -3,15 +3,13 @@ import LogoutButton from '../../components/LogoutButton/LogoutButton';
 import Profile from '../../components/Profile/Profile';
 import MakeEventButton from '../../components/MakeEventButton/MakeEventButton';
 import EventsDisplay from '../../components/EventsDisplay/EventsDisplay';
-import {Link} from 'react-router-dom'
+import Header from '../../components/Header/Header';
 
 function Dashboard() {
   return (
     <>
     <div>
-      <p>Users dashboard</p>
-      <Link to="/">Home</Link>
-      <LogoutButton />
+      <Header/>
       <Profile />
       <MakeEventButton/>
       <h2>Your Events</h2>

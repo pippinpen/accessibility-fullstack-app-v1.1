@@ -23,6 +23,8 @@ export const EventsProvider = (props) => {
   const {
     accessToken,
   } = useContext(AuthContext);
+  
+  console.log('AccessToken', accessToken);
 
   const [state, setState] = useState({
     loading: false,

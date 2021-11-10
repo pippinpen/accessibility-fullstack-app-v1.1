@@ -68,8 +68,7 @@ function EventForm({ initialValues }) {
     date: new Date(),
     venue: "",
     materials: "",
-    // food: true,
-    // drink: true,
+    foodDrink: "",
     // customQuestions: "",
   };
 
