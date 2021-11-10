@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
   },
   formRow: {
-    margin: theme.spacing(2),
+    margin: theme.spacing(3),
     minWidth: 120,
     display: "flex",
     justifyContent: "center",
@@ -117,7 +117,7 @@ function EventForm({ initialValues }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={classes.formrow}>
-        <label>What's the name of your event?</label>
+        {/* <label>What's the name of your event?</label> */}
         <Controller
           render={(
             { onChange, onBlur, value, name, ref },
@@ -170,7 +170,7 @@ function EventForm({ initialValues }) {
         />
       </div> */}
       <div className={classes.formrow}>
-        <label>When will your event take place?</label>
+        {/* <label>When will your event take place?</label> */}
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <Controller
           render={(
@@ -202,7 +202,7 @@ function EventForm({ initialValues }) {
         </MuiPickersUtilsProvider>
       </div>
       <div className={classes.formrow}>
-        <label>Will your event be online or in-person?</label>
+        {/* <label>Will your event be online or in-person?</label> */}
           <Controller
             render={(
               { onChange, onBlur, value, name, ref },
@@ -235,7 +235,7 @@ function EventForm({ initialValues }) {
           />
       </div>
       <div className={classes.formrow}>
-        <label>Will you have presenting materials you can share with participants?</label>
+        {/* <label>Will you have presenting materials you can share with participants?</label> */}
           <Controller
             render={(
               { onChange, onBlur, value, name, ref },
@@ -265,6 +265,39 @@ function EventForm({ initialValues }) {
             rules={{ required: true }}
           />
       </div>
+      <div className={classes.formrow}>
+        {/* <label>Will you serve food or drink?</label> */}
+          <Controller
+            render={(
+              { onChange, onBlur, value, name, ref },
+              { invalid, isTouched, isDirty }
+            ) => (
+              <FormControl component="fieldset">
+              <FormLabel component='legend'>Will you serve food or drink?</FormLabel>
+              <RadioGroup
+                row
+                inputRef={ref}
+                value={value}
+                onChange={onChange}
+                onBlur={onBlur}
+                error={!!errors.foodDrink}
+                helperText={errors.foodDrink?.message}
+                id="foodDrink"
+                name={name}
+                aria-label="foodDrink"
+              >
+                <FormControlLabel value="foodDrink" control={<Radio/>} label="Food and Drink"/>
+                <FormControlLabel value="noFoodnoDrink" control={<Radio/>} label="Neither"/>
+                <FormControlLabel value="food" control={<Radio/>} label="Just food"/>
+                <FormControlLabel value="drink" control={<Radio/>} label="Just drink"/>
+              </RadioGroup>
+              </FormControl>
+            )}
+            name="foodDrink"
+            control={control}
+            rules={{ required: true }}
+          />
+      </div>
       {/* <div className={classes.formrow}>
         <Controller
           render={(
@@ -276,20 +309,20 @@ function EventForm({ initialValues }) {
               value={value}
               onChange={onChange}
               onBlur={onBlur}
-              error={!!errors.price}
-              helperText={errors.price?.message}
-              id="price"
+              error={!!errors.customQuestions}
+              helperText={errors.customQuestions?.message}
+              id="customQuestions"
               name={name}
-              placeholder="x.xx"
-              label="price £x.xx"
+              placeholder="Your question"
+              label="Additional questions"
             />
           )}
-          name="price"
+          name="customQuestions"
           control={control}
           rules={{ required: true }}
         />
-      </div>
-      <div className={classes.formrow}>
+      </div> */}
+      {/* <div className={classes.formrow}>
         <Controller
           render={(
             { onChange, onBlur, value, name, ref },

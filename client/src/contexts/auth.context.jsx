@@ -38,7 +38,7 @@ export const AuthProvider = (props) => {
         const Acctoken = await getAccessTokenSilently();
         console.log("SETTING AT", Acctoken);
         setAccessToken(Acctoken);
-        // console.log("afterSet", accessToken);
+        console.log("afterSet", accessToken);
       } catch (err) {
         console.log("getAccessTokenSilently err", err);
         if (
