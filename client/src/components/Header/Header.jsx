@@ -20,7 +20,7 @@ import { UIContext } from "./../../contexts/ui.context";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    
+    paddingBlockEnd: "10vh",
   },
   toolbar: {
     backgroundColor: "hsl(236, 100%, 19%)",

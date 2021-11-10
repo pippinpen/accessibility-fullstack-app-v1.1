@@ -13,6 +13,7 @@ import './App.css';
 import Home from './pages/Home/Home';
 import Dashboard from './pages/Dashboard/Dashboard';
 import MakeEvent from './pages/MakeEvent/MakeEvent';
+import FindEvent from './pages/FindEvent/FindEvent';
 import NotFound from './pages/NotFound/NotFound';
 
 // COMPONENTS
@@ -57,6 +58,7 @@ function App() {
                       <Route exact path="/" component={Home} />
                       <Route path="/dashboard" component={Dashboard} />
                       <Route path="/make-event" component={MakeEvent} />
+                      <Route path="/find-event" component={FindEvent} />
                       <Route path="*" component={NotFound} />
                     </Switch>
                   </Auth0Wrapper>
