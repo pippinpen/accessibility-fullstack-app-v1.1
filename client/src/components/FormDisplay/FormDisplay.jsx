@@ -1,7 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import { EventsContext } from "../../contexts/events.context";
 import { makeStyles } from "@material-ui/core/styles";
-import ViewFormButton from "../ViewFormButton.jsx/ViewFormButton";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -13,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
   },
-  eventList: {
+  configList: {
     listStyle: "none",
     padding: 0,
   },
@@ -33,17 +32,12 @@ function EventsDisplay() {
   }, [loaded, fetchEvents, events, loading]);
 
   if (events.length === 0) {
-    return <p>You haven't made an event yet!</p>;
+    return <p>There are no config settings for this form</p>;
   }
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
-  // let eventID = null;
-  // if(!eventID) {
-  //   return <p>eventID undefined</p>  ;
-  // }
   
-
   return(
     <>
     <ul className={classes.eventList}>  
@@ -53,7 +47,6 @@ function EventsDisplay() {
           <h3>{events.formConfig.title}</h3>
           <p>Event ID: {events.formConfig._id}</p>
           <p>{events.formConfig.date}</p>
-          <ViewFormButton eventID={events.formConfig._id}/>
         {/* </li> */}
       </>
       ))}

@@ -50,6 +50,7 @@ export const EventsProvider = (props) => {
       setState({
         ...state,
         events: data,
+        error: null,
         loading: false,
         loaded: true,
       }),
@@ -80,6 +81,8 @@ export const EventsProvider = (props) => {
     if (loading || loaded || error) {
       return;
     }
+
+    if(!accessToken) return;
 
     setLoading();
 

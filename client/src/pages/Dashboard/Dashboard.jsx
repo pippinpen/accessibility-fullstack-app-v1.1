@@ -1,5 +1,4 @@
 import React from 'react';
-import LogoutButton from '../../components/LogoutButton/LogoutButton';
 import Profile from '../../components/Profile/Profile';
 import MakeEventButton from '../../components/MakeEventButton/MakeEventButton';
 import EventsDisplay from '../../components/EventsDisplay/EventsDisplay';

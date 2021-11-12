@@ -53,8 +53,7 @@ const schema = yup.object().shape({
   date: yup.string().required(),
   venue: yup.string().required(),
   materials: yup.string().required(),
-  // food: yup.boolean().required(),
-  // drink: yup.boolean().required(),
+  foodDrink: yup.string().required(),
   // customQuestions: yup.string().required(),
 });
 
