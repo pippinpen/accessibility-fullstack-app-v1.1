@@ -1,5 +1,4 @@
-import React, { useEffect, useContext } from "react";
-import { EventsContext } from "../../contexts/events.context";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -18,80 +17,45 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function EventsDisplay() {
+function FormDisplay() {
   const classes = useStyles();
-  const { events, loaded, fetchEvents, loading, error } =
-    useContext(EventsContext);
+  let data = {};
+  const fetchForm = async () => {
+    // console.log('loading', loading);
+    // console.log('error', error);
 
-  useEffect(() => {
-    console.log("in useEffect", events, loaded, loading);
-    
-    if (!loading && !loaded) {
-      fetchEvents();
+    try {
+      const response = await fetch("/api/v1/events");
+      if (!response.ok) {
+        throw response;
+      }
+      const data = await response.json();
+      // console.log('form from find-form', data);
+    } catch (err) {
+      console.log("err", err);
     }
-  }, [loaded, fetchEvents, events, loading]);
+  };
 
-  if (events.length === 0) {
+  if (data.length === 0) {
     return <p>There are no config settings for this form</p>;
   }
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
-
+  fetchForm();
   
   return(
     <>
     <ul className={classes.eventList}>  
-      {events.map((events) => (
+      {data.map((data) => (
       <>
-        {/* <li key={events.formconfig.id}> */}
-          <h3>{events.formConfig.title}</h3>
-          <p>Event ID: {events.formConfig._id}</p>
-          <p>{events.formConfig.date}</p>
+        {/* <li key={data.id}> */}
+          <h3>{data.title}</h3>
+          <p>Event ID: {data._id}</p>
+          <p>{data.date}</p>
         {/* </li> */}
       </>
       ))}
     </ul>
-    {/* {events.map((event) => {
-      return (
-        <ul>
-          {event[events].map(({ _id, title, date}) => {
-            return (
-              <li key={_id}>{title}</li>
-            )
-          })}
-        </ul>
-      )
-    })} */}
-    {/* <ul>  
-      {events.map(({ formConfig }) => (
-        <li key={formConfig._id}>
-          <h2>Event ID: {formConfig._id}</h2>
-          <ul>
-            {formConfig[events].map(({ title, _id }) => (
-              <li key={_id}>
-                {title}
-              </li>
-            ))}
-          </ul>
-        </li>
-      ))}
-    </ul> */}
-    {/* <ul className={classes.eventList}>  
-      {events.map(({ _id, title }) => (
-        <li key={_id}>
-          <h2>Event ID: {_id}</h2>
-          <ul style={{ listStyle: "none" }}>
-            {title.map(({ title, _id }) => (
-              <li key={_id}>
-                {title}
-              </li>
-            ))}
-          </ul>
-        </li>
-      ))}
-    </ul> */}
     </>
   );
 }
 
-export default EventsDisplay;
+export default FormDisplay;

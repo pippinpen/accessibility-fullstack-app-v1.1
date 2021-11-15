@@ -12,6 +12,7 @@ const {
   addOwnEvent,
   updateOwnEvent,
   removeOwnEvent,
+  getForm,
 } = require("../controllers/event.controller.js");
 
 // const { checkPermissions } = require("../middleware/permissions.middleware");
@@ -38,6 +39,7 @@ router
   .post("/", logToken, checkJwt, addOwnEvent)
   .put("/:id", checkJwt, updateOwnEvent)
   .delete("/:id", checkJwt, removeOwnEvent)
+  .get("/view-form/:id?", getForm)
   // Admin
   // .get("/:id?", logToken, checkJwt, getEvents)
   // .post("/", logToken, checkJwt, addEvent)

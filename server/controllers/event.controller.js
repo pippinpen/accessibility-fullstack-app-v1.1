@@ -124,3 +124,18 @@ exports.removeOwnEvent = function (req, res) {
     },
   );
 };
+
+exports.getForm = function (req, res) {
+  let query = {};
+  if (req.params.id) {
+    query._id = req.params.id;
+  }
+  FormConfig.findOne(query)
+    .exec((err, formData) => {
+      // if (err) return errorHandler(res, err);
+      if (err) return console.log(res, err);
+      if (req.params.id && formData.length === 0)
+        return res.status(404).send({ message: 'No form with that ID' });
+      return res.status(200).json(formData);
+    });
+};

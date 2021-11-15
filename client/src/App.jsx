@@ -14,6 +14,7 @@ import Home from './pages/Home/Home';
 import Dashboard from './pages/Dashboard/Dashboard';
 import MakeEvent from './pages/MakeEvent/MakeEvent';
 import FindEvent from './pages/FindEvent/FindEvent';
+import ViewForm from './pages/ViewForm/ViewForm';
 import NotFound from './pages/NotFound/NotFound';
 
 // COMPONENTS
@@ -59,6 +60,7 @@ function App() {
                       <Route path="/dashboard" component={Dashboard} />
                       <Route path="/make-event" component={MakeEvent} />
                       <Route path="/find-event" component={FindEvent} />
+                      <Route path="/view-form" component={ViewForm} />
                       <Route path="*" component={NotFound} />
                     </Switch>
                   </Auth0Wrapper>
