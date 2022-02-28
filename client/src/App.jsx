@@ -31,7 +31,7 @@ const onRedirectCallback = (appState) => {
     //   : window.location.pathname,
     appState && appState.targetUrl
       ? appState.targetUrl
-      : window.location.href = "http://localhost:3000/dashboard"
+      : window.location.href = "https://fullstack-accessibility-app.herokuapp.com/dashboard"
   );
 };
 
