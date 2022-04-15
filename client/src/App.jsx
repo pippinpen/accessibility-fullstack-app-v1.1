@@ -26,12 +26,9 @@ import { getConfig } from './config';
 
 const onRedirectCallback = (appState) => {
   history.push(
-    // appState && appState.returnTo
-    //   ? appState.returnTo
-    //   : window.location.pathname,
-    appState && appState.targetUrl
-      ? appState.targetUrl
-      : window.location.href = "https://fullstack-accessibility-app.herokuapp.com/dashboard"
+    appState && appState.returnTo
+      ? appState.returnTo
+      : window.location.pathname,
   );
 };
 
@@ -40,9 +37,7 @@ const providerConfig = {
   domain: config.domain,
   clientId: config.clientId,
   ...(config.audience ? { audience: config.audience } : null),
-  // redirectUri: window.location.origin,
-  // onRedirectCallback,
-  redirectUri: window.location.origin,
+  redirectUri: `${window.location.origin}/dashboard/`,
   onRedirectCallback,
 };
 
@@ -58,7 +53,7 @@ function App() {
                     <Switch>
                       <Route exact path="/" component={Home} />
                       <Route path="/dashboard" component={Dashboard} />
-                      <Route path="/make-event" component={MakeEvent} />
+                      <Route path="/make-event/" component={MakeEvent} />
                       <Route path="/find-event" component={FindEvent} />
                       <Route path="/view-form" component={ViewForm} />
                       <Route path="*" component={NotFound} />

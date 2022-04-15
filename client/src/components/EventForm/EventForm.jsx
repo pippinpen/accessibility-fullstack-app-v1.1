@@ -24,7 +24,7 @@ import { useParams } from "react-router-dom";
 import DateFnsUtils from "@date-io/date-fns";
 import "react-datepicker/dist/react-datepicker.css";
 // import "../EventForm/EventForm.css";
-
+import { useHistory } from "react-router-dom";
 
 import { EventsContext } from './../../contexts/events.context';
 
@@ -49,12 +49,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const schema = yup.object().shape({
-  title: yup.string().required(),
+  title: yup.string().required().min(3).max(20),
   date: yup.string().required(),
   venue: yup.string().required(),
   materials: yup.string().required(),
   foodDrink: yup.string().required(),
-  // customQuestions: yup.string().required(),
 });
 
 function EventForm({ initialValues }) {
@@ -68,7 +67,6 @@ function EventForm({ initialValues }) {
     venue: "",
     materials: "",
     foodDrink: "",
-    // customQuestions: "",
   };
 
   const { addEvent, updateEvent } = useContext(EventsContext);
@@ -88,6 +86,19 @@ function EventForm({ initialValues }) {
       ...initialValues,
     });
     setPopulated(true);
+  }
+
+  // const history = useHistory();
+  // const routeChange = async () =>{ 
+  //   let path = `/dashboard`; 
+  //   await addEvent() || updateEvent()
+  //   history.push(path);
+  // }
+
+  const history = useHistory();
+  const routeChange = () =>{ 
+    let path = `/dashboard`;
+    history.push(path);
   }
 
   // console.log("errors", errors);
@@ -110,9 +121,11 @@ function EventForm({ initialValues }) {
       addEvent(formValues);
     }
     reset(defaultValues);
+    routeChange();
   };
 
   return (
+    <>
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={classes.formrow}>
         {/* <label>What's the name of your event?</label> */}
@@ -373,6 +386,7 @@ function EventForm({ initialValues }) {
         </Button>
       </div>
     </form>
+    </>
   );
 }
 

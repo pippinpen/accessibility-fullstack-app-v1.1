@@ -1,18 +1,38 @@
 import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import {CircularProgress} from '@material-ui/core';
-import Alert from '@material-ui/lab/Alert';
+import { CircularProgress } from '@mui/material';
+import { Alert } from '@mui/material';
+
+import '../Auth0Wrapper/Auth0Wrapper.css';
+
 function Wrapper({ children }) {
   const {
     isLoading,
     error,
   } = useAuth0();
+
   if (isLoading) {
-    return (<CircularProgress />);
+    return (
+    <>
+      <div className="progress-alert">
+        <CircularProgress />
+      </div>
+    </>
+    );
   }
   if (error) {
-    return (<Alert severity="error">{error.message}</Alert>)
+    return (
+    <>
+      <div className="progress-alert">
+        <Alert severity="error">{error.message}</Alert>
+      </div>
+    </>
+    )
   }
-  return <>{children}</>;
+  return (
+  <>
+  {children}
+  </>
+  );
 }
 export default Wrapper;

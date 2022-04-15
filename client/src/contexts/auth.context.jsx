@@ -31,16 +31,16 @@ export const AuthProvider = (props) => {
   const [accessToken, setAccessToken] = useState(null);
 
   useEffect(() => {
-    console.log("AT", accessToken);
+    // console.log("AT", accessToken);
     const getToken = async () => {
-      console.log("gettng AT", `http://${domain}/api/v1`);
+      console.log("getting AT", `http://${domain}/api/v1`);
       try {
         const Acctoken = await getAccessTokenSilently();
-        console.log("SETTING AT", Acctoken);
+        // console.log("GOT AT", Acctoken);
         setAccessToken(Acctoken);
-        console.log("afterSet", accessToken);
+        // console.log("afterSet", accessToken);
       } catch (err) {
-        console.log("getAccessTokenSilently err", err);
+        // console.log("getAccessTokenSilently err", err);
         if (
           err.error === "login_required" ||
           err.error === "consent_required"
@@ -50,7 +50,7 @@ export const AuthProvider = (props) => {
       }
     };
     if (user) {
-      console.log("user", user);
+      // console.log("user", user);
       getToken();
     }
   }, [accessToken, getAccessTokenSilently, loginWithRedirect, user]);

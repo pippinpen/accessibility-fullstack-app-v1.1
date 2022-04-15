@@ -24,7 +24,7 @@ export const EventsProvider = (props) => {
     accessToken,
   } = useContext(AuthContext);
   
-  console.log('AccessToken', accessToken);
+  // console.log('AccessToken', accessToken);
 
   const [state, setState] = useState({
     loading: false,
@@ -78,11 +78,9 @@ export const EventsProvider = (props) => {
 
     const { loading, loaded, error } = state;
 
-    if (loading || loaded || error) {
+    if (loading || loaded || error || !accessToken ) {
       return;
     }
-
-    if(!accessToken) return;
 
     setLoading();
 
@@ -110,7 +108,7 @@ export const EventsProvider = (props) => {
       console.log("headers", headers);
       console.log("accessToken", accessToken);
       setLoading();
-      const {events} = state;
+      const { events } = state;
       try {
         const response = await fetch("/api/v1/events", {
           method: "POST",
@@ -125,7 +123,7 @@ export const EventsProvider = (props) => {
         const savedEvent = await response.json();
         console.log("got data", savedEvent);
         setEvents([...events, savedEvent]);
-        addToast(`Saved ${savedEvent.title}`, {
+        addToast(`Saved ${savedEvent.formConfig.title}`, {
           appearance: "success",
         });
       } catch (err) {
@@ -144,9 +142,9 @@ export const EventsProvider = (props) => {
       if(!accessToken) return;
       let newEvent = null;
       setLoading();
-      const {events} = state;
+      const { events } = state;
       try {
-        const response = await fetch(`/api/v1/events/${id}`, {
+        const response = await fetch(`/api/v1/events/:${id}`, {
           method: "PUT",
           headers: accessToken
             ? { ...headers, Authorization: `Bearer ${accessToken}` }
@@ -186,13 +184,13 @@ export const EventsProvider = (props) => {
           updatedEvents
         );
         setEvents(updatedEvents);
-        addToast(`Updated ${newEvent.title}`, {
+        addToast(`Updated ${newEvent.formConfig.title}`, {
           appearance: "success",
         });
       } catch (err) {
         console.log(err);
         setError(err);
-        addToast(`Error: Failed to update ${newEvent.title}`, {
+        addToast(`Error: Failed to update ${newEvent.formConfig.title}`, {
           appearance: "error",
         });
       }
@@ -205,9 +203,9 @@ export const EventsProvider = (props) => {
       if(!accessToken) return;
       let deletedEvent = null;
       setLoading();
-      const {events} = state;
+      const { events } = state;
       try {
-        const response = await fetch(`/api/v1/events/${id}`, {
+        const response = await fetch(`/api/v1/events/:${id}`, {
           method: "DELETE",
           headers: accessToken
             ? { ...headers, Authorization: `Bearer ${accessToken}` }
@@ -225,13 +223,13 @@ export const EventsProvider = (props) => {
           ...events.slice(index + 1),
         ];
         setEvents(updatedEvents);
-        addToast(`Deleted ${deletedEvent.title}`, {
+        addToast(`Deleted ${deletedEvent.formConfig.title}`, {
           appearance: "success",
         });
       } catch (err) {
         console.log(err);
         setError(err);
-        addToast(`Error: Failed to update ${deletedEvent.title}`, {
+        addToast(`Error: Failed to update ${deletedEvent.formConfig.title}`, {
           appearance: "error",
         });
       }

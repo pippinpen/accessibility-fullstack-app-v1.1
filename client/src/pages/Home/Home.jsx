@@ -1,6 +1,6 @@
 import React from 'react';
 import OrganiserButton from '../../components/OrganiserButton/OrganiserButton';
-import AttendeeButton from '../../components/AttendeeButton/AttendeeButton';
+// import AttendeeButton from '../../components/AttendeeButton/AttendeeButton';
 import { useAuth0 } from '@auth0/auth0-react';
 import Header from '../../components/Header/Header';
 import '../Home/Home.css';
@@ -14,7 +14,7 @@ function Home() {
       <h1>Home</h1>
       <div className="homeButtons">
       <OrganiserButton/>
-      <AttendeeButton/>
+      {/* <AttendeeButton/> */}
       </div>
     </>
   );

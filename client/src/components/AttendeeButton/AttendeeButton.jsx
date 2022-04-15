@@ -1,15 +1,15 @@
 import React from 'react';
-import { useAuth0 } from '@auth0/auth0-react';
+// import { useAuth0 } from '@auth0/auth0-react';
 import {
   Button,
-  Typography,
+  // Typography,
 } from "@material-ui/core/";
 import { makeStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
 
 const AttendeeButton = () => {
   
-  const { loginWithRedirect } = useAuth0();
+  // const { loginWithRedirect } = useAuth0();
 
   const useStyles = makeStyles((theme) => ({
     

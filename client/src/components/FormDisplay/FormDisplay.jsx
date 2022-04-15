@@ -1,4 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, {
+  // useEffect,
+  // useState
+} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -29,7 +32,7 @@ function FormDisplay() {
       if (!response.ok) {
         throw response;
       }
-      const data = await response.json();
+      // const data = await response.json();
       // console.log('form from find-form', data);
     } catch (err) {
       console.log("err", err);

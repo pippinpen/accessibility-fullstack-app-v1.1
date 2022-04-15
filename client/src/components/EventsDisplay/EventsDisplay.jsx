@@ -1,7 +1,10 @@
 import React, { useEffect, useContext } from "react";
 import { EventsContext } from "../../contexts/events.context";
 import { makeStyles } from "@material-ui/core/styles";
+import { IconButton } from "@material-ui/core";
+import { Delete, Edit } from "@material-ui/icons"
 import ViewFormButton from "../ViewFormButton.jsx/ViewFormButton";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -21,11 +24,12 @@ const useStyles = makeStyles((theme) => ({
 
 function EventsDisplay() {
   const classes = useStyles();
-  const { events, loaded, fetchEvents, loading, error } =
+
+  const { events, loaded, fetchEvents, loading, error, deleteEvent } =
     useContext(EventsContext);
 
   useEffect(() => {
-    console.log("in useEffect", events, loaded, loading);
+    // console.log("in useEffect", events, loaded, loading);
     
     if (!loading && !loaded) {
       fetchEvents();
@@ -43,62 +47,36 @@ function EventsDisplay() {
   //   return <p>eventID undefined</p>  ;
   // }
   
+  console.log(events);
 
   return(
     <>
-    <ul className={classes.eventList}>  
-      {events.map((events) => (
-      <>
-        {/* <li key={events.formconfig.id}> */}
-          <h3>{events.formConfig.title}</h3>
-          <p>Event ID: {events.formConfig._id}</p>
-          <p>{events.formConfig.date}</p>
-          <ViewFormButton eventID={events.formConfig._id}/>
-        {/* </li> */}
-      </>
+    <ul className={classes.eventList}>
+      {events.map(({ _id, formConfig: { title, date } }) => (
+      <li key={_id}>
+      <h3>{title}</h3>
+      <p>Event ID: {_id}</p>
+      <p>{date}</p>
+      <div className="eventButtons">
+        <IconButton
+        aria-label="update"
+        component={Link}
+        to={`/api/v1/events/${_id}`}
+        >
+          <Edit />
+        </IconButton>
+        <IconButton
+        aria-label="delete"
+        onClick={() => deleteEvent(_id)}
+        >
+          <Delete />
+        </IconButton>
+        <ViewFormButton/>
+      </div>
+      </li>
       ))}
     </ul>
-    {/* {events.map((event) => {
-      return (
-        <ul>
-          {event[events].map(({ _id, title, date}) => {
-            return (
-              <li key={_id}>{title}</li>
-            )
-          })}
-        </ul>
-      )
-    })} */}
-    {/* <ul>  
-      {events.map(({ formConfig }) => (
-        <li key={formConfig._id}>
-          <h2>Event ID: {formConfig._id}</h2>
-          <ul>
-            {formConfig[events].map(({ title, _id }) => (
-              <li key={_id}>
-                {title}
-              </li>
-            ))}
-          </ul>
-        </li>
-      ))}
-    </ul> */}
-    {/* <ul className={classes.eventList}>  
-      {events.map(({ _id, title }) => (
-        <li key={_id}>
-          <h2>Event ID: {_id}</h2>
-          <ul style={{ listStyle: "none" }}>
-            {title.map(({ title, _id }) => (
-              <li key={_id}>
-                {title}
-              </li>
-            ))}
-          </ul>
-        </li>
-      ))}
-    </ul> */}
-    </>
-  );
-}
+  </>
+  )};
 
 export default EventsDisplay;
