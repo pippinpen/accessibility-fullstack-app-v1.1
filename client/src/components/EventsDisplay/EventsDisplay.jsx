@@ -47,7 +47,7 @@ function EventsDisplay() {
   //   return <p>eventID undefined</p>  ;
   // }
   
-  console.log(events);
+  // console.log(events);
 
   return(
     <>
@@ -61,7 +61,7 @@ function EventsDisplay() {
         <IconButton
         aria-label="update"
         component={Link}
-        to={`/api/v1/events/${_id}`}
+        to={`/edit-event/${_id}`}
         >
           <Edit />
         </IconButton>

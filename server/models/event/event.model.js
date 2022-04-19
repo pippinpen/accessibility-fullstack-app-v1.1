@@ -7,10 +7,34 @@ const eventSchema = new Schema({
       required: true,
     },
     formConfig: {
-      type: mongoose.ObjectId,
-      ref: 'FormConfig',
+      title: {
+      type: String,
+      required: true,
+      },
+      date: {
+        type: Date,
+        required: true,
+      },
+      venue: {
+        type: String,
+        required: true,
+      },
+      materials: {
+        type: String,
+        required: true,
+      },
+      foodDrink: {
+        type: String,
+        required: true,
+      },
     },
-});
+    responses: {
+      type: [String],
+      default: [],
+    }
+},
+{timestamps: true}
+);
 
 const Event = mongoose.model('Event', eventSchema);
 module.exports = Event;

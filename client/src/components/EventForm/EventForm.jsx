@@ -77,23 +77,14 @@ function EventForm({ initialValues }) {
     defaultValues,
   });
 
-  // console.log("formState", formState);
   const { isDirty, isValid } = formState;
 
   if (initialValues && !populated) {
-    // initialValues.price = initialValues.price / 100;
     reset({
       ...initialValues,
     });
     setPopulated(true);
   }
-
-  // const history = useHistory();
-  // const routeChange = async () =>{ 
-  //   let path = `/dashboard`; 
-  //   await addEvent() || updateEvent()
-  //   history.push(path);
-  // }
 
   const history = useHistory();
   const routeChange = () =>{ 
@@ -124,6 +115,9 @@ function EventForm({ initialValues }) {
     routeChange();
   };
 
+  console.log("isValid?", isValid);
+  console.log("isDirty?", isDirty);
+
   return (
     <>
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -152,34 +146,6 @@ function EventForm({ initialValues }) {
           rules={{ required: true }}
         />
       </div>
-      {/* <div className={classes.formrow}>
-        <label>What date will your event take place?</label>
-        <Controller
-          render={(
-            { onChange, onBlur, value, ref },
-            { invalid, isTouched, isDirty }
-          ) => (
-            <ReactDatePicker
-              onChange={onChange}
-              onBlur={onBlur}
-              inputRef={ref}
-              selected={value}
-              // name={name}
-              error={!!errors.date}
-              helperText={errors.date?.message}
-              // id="date"
-              placeholderText="Select date"
-              // label="Event Date"
-              className="input"
-              dateFormat="dd/MM/yyyy"
-
-            />
-          )}
-          name="date"
-          control={control}
-          // rules={{ required: true }}
-        />
-      </div> */}
       <div className={classes.formrow}>
         {/* <label>When will your event take place?</label> */}
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -309,70 +275,6 @@ function EventForm({ initialValues }) {
             rules={{ required: true }}
           />
       </div>
-      {/* <div className={classes.formrow}>
-        <Controller
-          render={(
-            { onChange, onBlur, value, name, ref },
-            { invalid, isTouched, isDirty }
-          ) => (
-            <TextField
-              inputRef={ref}
-              value={value}
-              onChange={onChange}
-              onBlur={onBlur}
-              error={!!errors.customQuestions}
-              helperText={errors.customQuestions?.message}
-              id="customQuestions"
-              name={name}
-              placeholder="Your question"
-              label="Additional questions"
-            />
-          )}
-          name="customQuestions"
-          control={control}
-          rules={{ required: true }}
-        />
-      </div> */}
-      {/* <div className={classes.formrow}>
-        <Controller
-          render={(
-            { onChange, onBlur, value, name, ref },
-            { invalid, isTouched, isDirty }
-          ) => (
-            <FormControl className={classes.formControl}>
-              <InputLabel htmlFor="category">Choose a category</InputLabel>
-              <Select
-                inputRef={ref}
-                value={value}
-                onChange={onChange}
-                onBlur={onBlur}
-                error={!!errors.category}
-                id="category"
-                name={name}
-                label="category"
-                required={true}
-              >
-                <MenuItem value="">Choose a category</MenuItem>
-                {productCategories.map((category) => (
-                  <MenuItem key={category} value={category}>
-                    {category}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          )}
-          name="category"
-          control={control}
-          rules={{ required: true }}
-        />
-        {errors.category ? (
-                <InputLabel htmlFor="category">
-                  {errors.category.message}
-                </InputLabel>
-              ) : (
-                ""
-              )}
-      </div> */}
       <div className={classes.formrow}>
         <Button onClick={() => reset(defaultValues)}>Reset</Button>
         <Button

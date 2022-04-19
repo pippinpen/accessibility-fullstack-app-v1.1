@@ -139,12 +139,13 @@ export const EventsProvider = (props) => {
 
   const updateEvent = useCallback(
     async (id, updates) => {
+      console.log('updates event context', updates)
       if(!accessToken) return;
       let newEvent = null;
       setLoading();
       const { events } = state;
       try {
-        const response = await fetch(`/api/v1/events/:${id}`, {
+        const response = await fetch(`/api/v1/events/${id}`, {
           method: "PUT",
           headers: accessToken
             ? { ...headers, Authorization: `Bearer ${accessToken}` }
@@ -205,7 +206,7 @@ export const EventsProvider = (props) => {
       setLoading();
       const { events } = state;
       try {
-        const response = await fetch(`/api/v1/events/:${id}`, {
+        const response = await fetch(`/api/v1/events/${id}`, {
           method: "DELETE",
           headers: accessToken
             ? { ...headers, Authorization: `Bearer ${accessToken}` }

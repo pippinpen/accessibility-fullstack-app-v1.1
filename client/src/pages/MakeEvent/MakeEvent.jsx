@@ -2,7 +2,7 @@ import React from 'react';
 import EventForm from '../../components/EventForm/EventForm';
 import Header from '../../components/Header/Header';
 
-function Dashboard() {
+function MakeEvent() {
   return (
     <>
     <div>
@@ -14,4 +14,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default MakeEvent;
