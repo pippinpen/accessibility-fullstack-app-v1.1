@@ -168,7 +168,10 @@ export const EventsProvider = (props) => {
         // Merge with updates
         newEvent = {
           ...oldEvent,
-          ...updates,
+          formConfig: {
+            ...oldEvent.formConfig,
+            ...updates,
+          },
         };
         console.log(
           "🚀 ~ file: events.context.js ~ line 99 ~ updateEventt ~ newEventt",

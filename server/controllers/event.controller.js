@@ -98,18 +98,30 @@ exports.updateEvent = function (req, res) {
   });
 };
 
+// function that adds dot path to updates object for UpdateOne
+const createMongooseUpdatePath = (updatesObj) => {
+  const dotPathUpdatesObj = {};
+  for (const key in updatesObj){
+    const value = updatesObj[key];
+    const newKey = ('formConfig' + '.' + key);
+    dotPathUpdatesObj[newKey] = value;
+  }
+  return dotPathUpdatesObj;
+};
+
 exports.updateOwnEvent = function (req, res) {
+  const updates = createMongooseUpdatePath(req.body);
+  logger.info(`hellllooooo`, updates)
   Event.updateOne(
     { _id: req.params.id, owner: req.user.sub },
-    req.body,
+    { $set: updates },
     function (err, result) {
       if (err) return errorHandler(res, err);
       logger.info(`result ${result}`);
       if (result.nModified === 0)
         return res.status(404).send({ message: 'No event with that ID' });
       res.sendStatus(200);
-    },
-  );
+    });
 };
 
 exports.removeEvent = function (req, res) {
