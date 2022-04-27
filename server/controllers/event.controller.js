@@ -1,7 +1,7 @@
 const Event = require('../models/event/event.model');
-// const FormConfig = require('../models/formConfig/formConfig.model');
-const { errorHandler } = require('./utils');
+const { errorHandler } = require('./../utils/loggerUtil');
 const logger = require('./../logger');
+const { createMongooseUpdatePath } = require("./../utils/mongoosePathUtil");
 
 exports.getEvents = function (req, res) {
   let query = {};
@@ -58,36 +58,6 @@ exports.addOwnEvent = function (req, res) {
     });
   };
 
-  
-  
-  
-  // formConfig ver
-  // const eventData = req.body;
-  // console.log(`eventData ${JSON.stringify(eventData)}`);
-  // const formConfig = new FormConfig(req.body);
-  // formConfig.save((err, record) => {
-  //   console.log("formConfig", formConfig);
-  //   if (err) return errorHandler(res, err);
-  //   const newEvent = new Event({
-  //     customerID: req.user.sub,
-  //     formConfig: record._id,
-  //   });
-  //   newEvent.save((err, event) => {
-  //     if (err) return errorHandler(res, err);
-  //     console.log("event", event);
-  //     return res.status(201).json(event);
-  //   });
-  // });
-  
-  // ignore
-  // const eventData = { ...req.body, customerID: req.event.sub };
-  // logger.info(`eventData ${eventData}`);
-  // const newEvent = new Event(eventData);
-  // newEvent.save((err, event) => {
-  //   if (err) return errorHandler(res, err);
-  //   return res.status(201).json(event);
-  // });
-
 exports.updateEvent = function (req, res) {
   Event.updateOne({ _id: req.params.id }, req.body, function (err, result) {
     if (err) return errorHandler(res, err);
@@ -98,20 +68,8 @@ exports.updateEvent = function (req, res) {
   });
 };
 
-// function that adds dot path to updates object for UpdateOne
-const createMongooseUpdatePath = (updatesObj) => {
-  const dotPathUpdatesObj = {};
-  for (const key in updatesObj){
-    const value = updatesObj[key];
-    const newKey = ('formConfig' + '.' + key);
-    dotPathUpdatesObj[newKey] = value;
-  }
-  return dotPathUpdatesObj;
-};
-
 exports.updateOwnEvent = function (req, res) {
   const updates = createMongooseUpdatePath(req.body);
-  logger.info(`hellllooooo`, updates)
   Event.updateOne(
     { _id: req.params.id, owner: req.user.sub },
     { $set: updates },

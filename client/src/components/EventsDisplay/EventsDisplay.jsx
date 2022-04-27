@@ -2,9 +2,10 @@ import React, { useEffect, useContext } from "react";
 import { EventsContext } from "../../contexts/events.context";
 import { makeStyles } from "@material-ui/core/styles";
 import { IconButton } from "@material-ui/core";
-import { Delete, Edit } from "@material-ui/icons"
+import { DeleteForever, Edit } from "@material-ui/icons"
 import ViewFormButton from "../ViewFormButton.jsx/ViewFormButton";
 import { Link } from "react-router-dom";
+import dateFormat from "./../../utils/dateFormat"; 
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -42,36 +43,33 @@ function EventsDisplay() {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
-  // let eventID = null;
-  // if(!eventID) {
-  //   return <p>eventID undefined</p>  ;
-  // }
-  
-  // console.log(events);
-
   return(
     <>
     <ul className={classes.eventList}>
       {events.map(({ _id, formConfig: { title, date } }) => (
       <li key={_id}>
       <h3>{title}</h3>
-      <p>Event ID: {_id}</p>
-      <p>{date}</p>
+      <p>{dateFormat(date)}</p>
+      <p>ID for attendees: {_id}</p>
       <div className="eventButtons">
         <IconButton
         aria-label="update"
         component={Link}
         to={`/edit-event/${_id}`}
         >
-          <Edit />
+          <Edit
+          fontSize="large"
+          />
         </IconButton>
         <IconButton
         aria-label="delete"
         onClick={() => deleteEvent(_id)}
         >
-          <Delete />
+          <DeleteForever
+          fontSize="large"
+          />
         </IconButton>
-        <ViewFormButton/>
+        <ViewFormButton _id={_id} />
       </div>
       </li>
       ))}

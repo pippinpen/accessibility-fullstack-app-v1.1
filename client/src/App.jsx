@@ -15,7 +15,7 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import MakeEvent from './pages/MakeEvent/MakeEvent';
 import EditEvent from './pages/EditEvent/EditEvent';
 import FindEvent from './pages/FindEvent/FindEvent';
-import ViewForm from './pages/ViewForm/ViewForm';
+import ViewEvent from './pages/ViewEvent/ViewEvent';
 import NotFound from './pages/NotFound/NotFound';
 
 // COMPONENTS
@@ -57,7 +57,7 @@ function App() {
                       <Route path="/make-event/" component={MakeEvent} />
                       <Route path="/edit-event/:id" component={EditEvent} />
                       <Route path="/find-event" component={FindEvent} />
-                      <Route path="/view-form" component={ViewForm} />
+                      <Route path="/view-event/:id" component={ViewEvent} />
                       <Route path="*" component={NotFound} />
                     </Switch>
                   </Auth0Wrapper>
