@@ -17,6 +17,8 @@ module.exports = function (app) {
   }
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
+
+  // Content Secruit Policy error fix https://community.auth0.com/t/helmet-content-security-policy-error-for-react-express-app-on-azure/50674/2
   app.use(helmet());
   app.use(cors());
 
