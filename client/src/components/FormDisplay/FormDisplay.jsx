@@ -28,19 +28,19 @@ function FormDisplay({ event }) {
   let { title, date, venue, materials, foodDrink} = event.formConfig;
 
   // Conditional rendering accessibility suggestions
-  if (venue === "inPerson"){
-    let venueSuggestions = () => {
-      return (
-        <li>In person Venue whoo</li>
-      )
-    }; 
-  } else {
-    let venueSuggestions = () => {
-      return (
-        <li>Online event whoo</li>
-      )
-    };
-  }
+  // if (venue === "inPerson"){
+  //   let venueSuggestions = () => {
+  //     return (
+  //       <li>In person Venue whoo</li>
+  //     )
+  //   }; 
+  // } else {
+  //   let venueSuggestions = () => {
+  //     return (
+  //       <li>Online event whoo</li>
+  //     )
+  //   };
+  // }
 
   return(
     <div
