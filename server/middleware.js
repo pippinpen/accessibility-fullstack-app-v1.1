@@ -19,7 +19,21 @@ module.exports = function (app) {
   app.use(express.json());
 
   // Content Secruit Policy error fix https://community.auth0.com/t/helmet-content-security-policy-error-for-react-express-app-on-azure/50674/2
-  app.use(helmet());
+  app.use(helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"], 
+        scriptSrc: ["'self'"],
+        styleSrc: ["'self'", 'https://fonts.googleapis.com', "'unsafe-inline'"],
+        imgSrc: ["'self'", 'data:'],
+        connectSrc: ["'self'", 'dev-kabxz7i1.us.auth0.com/oauth/token'],
+        fontSrc: ["'self'", 'https://fonts.gstatic.com'],
+        objectSrc: ["'self'"],
+        mediaSrc: ["'self'"],
+        frameSrc: ["'self'", "dev-kabxz7i1.us.auth0.com"],
+      },
+    }
+  }));
   app.use(cors());
 
   // http logging
