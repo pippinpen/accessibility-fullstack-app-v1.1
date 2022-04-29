@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import Header from '../../components/Header/Header';
-import FormDisplay from '../../components/FormDisplay/FormDisplay';
+import ViewEvent from '../../components/ViewEvent/ViewEvent';
 import { useParams } from "react-router-dom";
 import { EventsContext } from './../../contexts/events.context';
 
@@ -18,8 +18,8 @@ useEffect(() => {
   return (
     <>
       <Header />
-      <h1>View Event</h1>
-      <FormDisplay event={event}/>
+      <h1>Your Event's Accessibility Options</h1>
+      <ViewEvent event={event}/>
     </>
   );
 }

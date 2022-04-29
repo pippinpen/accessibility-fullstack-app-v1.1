@@ -25,7 +25,7 @@ module.exports = function (app) {
         defaultSrc: ["'self'"], 
         scriptSrc: ["'self'"],
         styleSrc: ["'self'", 'https://fonts.googleapis.com', "'unsafe-inline'"],
-        imgSrc: ["'self'", 'https://s.gravatar.com'],
+        imgSrc: ["'self'", 'https://s.gravatar.com', 'https://i1.wp.com/cdn.auth0.com/'],
         connectSrc: ["'self'", 'dev-kabxz7i1.us.auth0.com/oauth/token'],
         fontSrc: ["'self'", 'https://fonts.gstatic.com'],
         objectSrc: ["'self'"],
