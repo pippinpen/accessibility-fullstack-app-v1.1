@@ -16,6 +16,11 @@ import MakeEvent from './pages/MakeEvent/MakeEvent';
 import EditEvent from './pages/EditEvent/EditEvent';
 import FindEvent from './pages/FindEvent/FindEvent';
 import ViewEvent from './pages/ViewEvent/ViewEvent';
+import About from './pages/About/About';
+import Resources from './pages/Resources/Resources';
+import AccessibilityStatement from './pages/AccessibilityStatement/AccessibilityStatement';
+import PrivacyPolicy from './pages/PrivacyPolicy/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService/TermsOfService';
 import NotFound from './pages/NotFound/NotFound';
 
 // COMPONENTS
@@ -58,6 +63,11 @@ function App() {
                       <Route path="/edit-event/:id" component={EditEvent} />
                       <Route path="/find-event" component={FindEvent} />
                       <Route path="/view-event/:id" component={ViewEvent} />
+                      <Route path="/about/" component={About} />
+                      <Route path="/resources/" component={Resources} />
+                      <Route path="/accessibility-statement/" component={AccessibilityStatement} />
+                      <Route path="/privacy-policy/" component={PrivacyPolicy} />
+                      <Route path="/terms-of-service/" component={TermsOfService} />
                       <Route path="*" component={NotFound} />
                     </Switch>
                   </Auth0Wrapper>

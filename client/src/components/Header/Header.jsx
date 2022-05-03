@@ -76,7 +76,7 @@ export default function Header() {
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant="h1" noWrap>
-            AccessAbility
+            Accessibility App
           </Typography>
           {!isAuthenticated ? (
             <Button
