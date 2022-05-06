@@ -13,10 +13,14 @@ export const EventsContext = createContext({
   addEvent: () => {},
   updateEvent: () => {},
   deleteEvent: () => {},
-  loaded: false,
+  eventsLoaded: false,
   loading: false,
   error: null,
   events: [],
+  fetchAttendeeEvent: () => {},
+  updateAttendeeResponse: () => {},
+  attendeeEventLoaded: false,
+  attendeeEvent: {},
 });
 
 export const EventsProvider = (props) => {
@@ -28,13 +32,15 @@ export const EventsProvider = (props) => {
 
   const [state, setState] = useState({
     loading: false,
-    loaded: false,
+    eventsLoaded: false,
+    attendeeEventLoaded: false,
     error: null,
     events: [],
+    attendeeEvent: {}, 
   });
 
-  const {loading, error, events, loaded} = state;
-  // console.log('rerendering', {loading, error, events, loaded});
+  const {loading, error, events, eventsLoaded, attendeeEvent, attendeeEventLoaded} = state;
+  // console.log('rerendering', {loading, error, events, eventsLoaded});
 
   const setLoading = useCallback(
     () =>
@@ -52,7 +58,19 @@ export const EventsProvider = (props) => {
         events: data,
         error: null,
         loading: false,
-        loaded: true,
+        eventsLoaded: true,
+      }),
+    [state]
+  );
+
+  const setAttendeeEvent = useCallback(
+    (data) =>
+      setState({
+        ...state,
+        attendeeEvent: data,
+        error: null,
+        loading: false,
+        attendeeEventLoaded: true,
       }),
     [state]
   );
@@ -63,7 +81,7 @@ export const EventsProvider = (props) => {
         ...state,
         error: err.message || err.statusText,
         loading: false,
-        loaded: true,
+        eventsLoaded: true,
       }),
     [state]
   );
@@ -76,9 +94,15 @@ export const EventsProvider = (props) => {
     // console.log('loading', loading);
     // console.log('error', error);
 
-    const { loading, loaded, error } = state;
 
-    if (loading || loaded || error || !accessToken ) {
+    // Polling
+    setTimeout(()=>{
+    fetchEvents()
+    }, 60000);
+
+    const { loading, eventsLoaded, error } = state;
+
+    if (loading || eventsLoaded || error || !accessToken ) {
       return;
     }
 
@@ -101,6 +125,36 @@ export const EventsProvider = (props) => {
       setError(err);
     }
   }, [accessToken, setError, setLoading, setEvents, state]);
+
+  const fetchAttendeeEvent = useCallback(async (id) => {
+
+    const { loading, attendeeEventLoaded, error } = state;
+
+    if (loading || attendeeEventLoaded || error) {
+      return;
+    }
+
+    setLoading();
+
+    try {
+      const response = await fetch(`/api/v1/events/view-form/${id}`, {
+        method: 'GET',
+        headers
+        }
+        );
+      if (!response.ok) {
+        throw response;
+      }
+      const dataArray = await response.json();
+      let [ eventData ] = dataArray;
+      setAttendeeEvent(eventData);
+      // console.log('events from context', events);
+    } catch (err) {
+      console.log("err", err);
+      setError(err);
+    }
+  }, [setError, setLoading, setAttendeeEvent, state]);
+
 
   const addEvent = useCallback(
     async (formData) => {
@@ -137,70 +191,121 @@ export const EventsProvider = (props) => {
     [accessToken, addToast, setLoading, setError,setEvents, state]
   );
 
-  const updateEvent = useCallback(
+  const updateAttendeeResponse = useCallback(
     async (id, updates) => {
-      console.log('updates event context', updates)
-      if(!accessToken) return;
-      let newEvent = null;
+      console.log('update attendee response event context', updates)
       setLoading();
-      const { events } = state;
+      const { attendeeEvent } = state;
       try {
-        const response = await fetch(`/api/v1/events/${id}`, {
+        const response = await fetch(`/api/v1/events/event-response/${id}`, {
           method: "PUT",
-          headers: accessToken
-            ? { ...headers, Authorization: `Bearer ${accessToken}` }
-            : headers,
+          headers,
           body: JSON.stringify(updates),
         });
         if (!response.ok) {
           throw response;
         }
-        // Get index
-        const index = events.findIndex((event) => event._id === id);
 
-        // Get actual event
-        const oldEvent = events[index];
+        // Get old responses
+        const oldResponses = attendeeEvent.responses;
         console.log(
-          "🚀 ~ file: events.context.js ~ line 95 ~ updateEvent ~ oldEvent",
-          oldEvent
+          "🚀 ~ file: events.context.js ~ line 95 ~ updateEvent ~ oldResponses",
+          oldResponses
         );
 
-        // Merge with updates
-        newEvent = {
-          ...oldEvent,
-          formConfig: {
-            ...oldEvent.formConfig,
-            ...updates,
-          },
-        };
         console.log(
-          "🚀 ~ file: events.context.js ~ line 99 ~ updateEventt ~ newEventt",
-          newEvent
+          "🚀 ~ file: events.context.js ~ line 99 ~ updateAttendeeResponses ~ newResponse",
+          updates
         );
-        // recreate the events array
-        const updatedEvents = [
-          ...events.slice(0, index),
-          newEvent,
-          ...events.slice(index + 1),
+        // recreate the responses array
+        const updatedResponses = [
+          ...oldResponses,
         ];
+        updatedResponses.push(updates);
         console.log(
           "🚀 ~ file: event.context.js ~ line 120 ~ updatedEvents",
-          updatedEvents
+          updatedResponses
         );
-        setEvents(updatedEvents);
-        addToast(`Updated ${newEvent.formConfig.title}`, {
+        setAttendeeEvent(updatedResponses);
+        fetchEvents();
+        addToast(`Response added to ${attendeeEvent.formConfig.title}`, {
           appearance: "success",
         });
       } catch (err) {
         console.log(err);
         setError(err);
-        addToast(`Error: Failed to update ${newEvent.formConfig.title}`, {
+        addToast(`Error: Failed to update ${attendeeEvent.formConfig.title}`, {
           appearance: "error",
         });
       }
     },
-    [accessToken, addToast, setError, setLoading, setEvents, state]
+    [addToast, setError, setLoading, setAttendeeEvent, fetchEvents, state]
   );
+
+    const updateEvent = useCallback(
+      async (id, updates) => {
+        console.log('updates event context', updates)
+        if(!accessToken) return;
+        let newEvent = null;
+        setLoading();
+        const { events } = state;
+        try {
+          const response = await fetch(`/api/v1/events/${id}`, {
+            method: "PUT",
+            headers: accessToken
+              ? { ...headers, Authorization: `Bearer ${accessToken}` }
+              : headers,
+            body: JSON.stringify(updates),
+          });
+          if (!response.ok) {
+            throw response;
+          }
+          // Get index
+          const index = events.findIndex((event) => event._id === id);
+  
+          // Get actual event
+          const oldEvent = events[index];
+          console.log(
+            "🚀 ~ file: events.context.js ~ line 95 ~ updateEvent ~ oldEvent",
+            oldEvent
+          );
+  
+          // Merge with updates
+          newEvent = {
+            ...oldEvent,
+            formConfig: {
+              ...oldEvent.formConfig,
+              ...updates,
+            },
+          };
+          console.log(
+            "🚀 ~ file: events.context.js ~ line 99 ~ updateEventt ~ newEventt",
+            newEvent
+          );
+          // recreate the events array
+          const updatedEvents = [
+            ...events.slice(0, index),
+            newEvent,
+            ...events.slice(index + 1),
+          ];
+          console.log(
+            "🚀 ~ file: event.context.js ~ line 120 ~ updatedEvents",
+            updatedEvents
+          );
+          setEvents(updatedEvents);
+          addToast(`Updated ${newEvent.formConfig.title}`, {
+            appearance: "success",
+          });
+        } catch (err) {
+          console.log(err);
+          setError(err);
+          addToast(`Error: Failed to update ${newEvent.formConfig.title}`, {
+            appearance: "error",
+          });
+        }
+      },
+      [accessToken, addToast, setError, setLoading, setEvents, state]
+    );
 
   const deleteEvent = useCallback(
     async (id) => {
@@ -249,11 +354,15 @@ export const EventsProvider = (props) => {
         events,
         loading,
         error,
-        loaded,
+        eventsLoaded,
         fetchEvents,
         addEvent,
         updateEvent,
         deleteEvent,
+        attendeeEventLoaded,
+        fetchAttendeeEvent,
+        attendeeEvent,
+        updateAttendeeResponse,
       }}
     >
       {props.children}

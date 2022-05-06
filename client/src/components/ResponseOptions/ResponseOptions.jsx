@@ -1,5 +1,4 @@
 import React from "react";
-// import { makeStyles } from "@material-ui/core/styles";
 import dateFormat from '../../utils/dateFormat'
 import InPersonVenueOptions from "../InPersonVenueOptions/InPersonVenueOptions";
 import OnlineVenueOptions from "../OnlineVenueOptions/OnlineVenueOptions";
@@ -7,23 +6,8 @@ import MaterialsOptions from "../MaterialsOptions/MaterialsOptions";
 import FoodOptions from "../FoodOptions/FoodOptions";
 import DrinkOptions from "../DrinkOptions/DrinkOptions";
 
-// const useStyles = makeStyles((theme) => ({
-//   button: {
-//     margin: theme.spacing(1),
-//   },
-//   formRow: {
-//     margin: theme.spacing(1),
-//     minWidth: 120,
-//     display: "flex",
-//     justifyContent: "center",
-//   },
-//   configList: {
-//     listStyle: "none",
-//     padding: 0,
-//   },
-// }));
 
-function FormDisplay({ event }) {
+function ResponseOptions({ event }) {
   // const classes = useStyles();
 
   if (!event) {
@@ -65,7 +49,7 @@ function FormDisplay({ event }) {
       <h3>Title: {title}</h3>
       <p>Date: {dateFormat(date)}</p>
       <p>ID: {event._id}</p>
-      <p>With your particular type of event, the following accessibility options should be offered.</p>
+      <p>Please answer the following form to tell the event organisers what accessibility provisions they need to provide</p>
       <div>
         {venueSuggestions}
       </div>
@@ -75,8 +59,9 @@ function FormDisplay({ event }) {
       <div>
         {foodDrinkSuggestions}
       </div>
+
     </div>
   );
 }
 
-export default FormDisplay;
+export default ResponseOptions;

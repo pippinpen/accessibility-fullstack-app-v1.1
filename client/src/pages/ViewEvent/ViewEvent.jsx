@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from 'react';
 import Header from '../../components/Header/Header';
-import ViewEvent from '../../components/ViewEvent/ViewEvent';
+import EventOptionsDisplay from '../../components/EventOptionsDisplay/EventOptionsDisplay';
 import { useParams } from "react-router-dom";
 import { EventsContext } from './../../contexts/events.context';
 
-function ViewForm() {
+function ViewEvent() {
   let { id } = useParams();
   const { events, loaded, fetchEvents } = useContext(EventsContext);
 
@@ -19,9 +19,9 @@ useEffect(() => {
     <>
       <Header />
       <h1>Your Event's Accessibility Options</h1>
-      <ViewEvent event={event}/>
+      <EventOptionsDisplay event={event}/>
     </>
   );
 }
 
-export default ViewForm;
+export default ViewEvent;

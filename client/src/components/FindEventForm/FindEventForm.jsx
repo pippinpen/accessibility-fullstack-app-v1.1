@@ -53,12 +53,12 @@ function FindEventForm() {
 
   const history = useHistory();
   const routeChange = (formValues) =>{ 
-  let path = `/view-form/:${formValues}?`; 
+  let path = `/view-form/${formValues}?`; 
   history.push(path);
   };
 
   const onSubmit = ( formValues ) => {
-    console.log("formValues", formValues);
+    // console.log("formValues", formValues);
     let formID = formValues.formID
     routeChange(formID);
   };
@@ -84,7 +84,6 @@ function FindEventForm() {
               helperText={errors.formID?.message}
               id="formID"
               name={name}
-              // placeholder="fff"
               label="Event ID"
             />
           )}
