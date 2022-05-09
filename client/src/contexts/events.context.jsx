@@ -206,27 +206,34 @@ export const EventsProvider = (props) => {
           throw response;
         }
 
-        // Get old responses
-        const oldResponses = attendeeEvent.responses;
-        console.log(
-          "🚀 ~ file: events.context.js ~ line 95 ~ updateEvent ~ oldResponses",
-          oldResponses
-        );
+        // // Get old responses
+        // // const oldResponses = attendeeEvent.responses;
+        // console.log(
+        //   "🚀 ~ file: events.context.js ~ line 95 ~ updateEvent ~ oldResponses",
+        //   oldResponses
+        // );
 
         console.log(
           "🚀 ~ file: events.context.js ~ line 99 ~ updateAttendeeResponses ~ newResponse",
           updates
         );
         // recreate the responses array
-        const updatedResponses = [
-          ...oldResponses,
-        ];
-        updatedResponses.push(updates);
+        const updatedAttendeeEvent = {
+          ...attendeeEvent,
+          responses: [
+            ...attendeeEvent.responses,
+            updates,
+          ],
+        };
+        // const updatedResponses = [
+        //   ...oldResponses,
+        // ];
+        // updatedResponses.push(updates);
         console.log(
           "🚀 ~ file: event.context.js ~ line 120 ~ updatedEvents",
-          updatedResponses
+          updatedAttendeeEvent
         );
-        setAttendeeEvent(updatedResponses);
+        setAttendeeEvent(updatedAttendeeEvent);
         fetchEvents();
         addToast(`Response added to ${attendeeEvent.formConfig.title}`, {
           appearance: "success",

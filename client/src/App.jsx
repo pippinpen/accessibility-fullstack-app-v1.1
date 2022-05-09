@@ -22,6 +22,7 @@ import Resources from './pages/Resources/Resources';
 import AccessibilityStatement from './pages/AccessibilityStatement/AccessibilityStatement';
 import PrivacyPolicy from './pages/PrivacyPolicy/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService/TermsOfService';
+import Success from './pages/Success/Success';
 import NotFound from './pages/NotFound/NotFound';
 
 // COMPONENTS
@@ -70,6 +71,7 @@ function App() {
                       <Route path="/accessibility-statement/" component={AccessibilityStatement} />
                       <Route path="/privacy-policy/" component={PrivacyPolicy} />
                       <Route path="/terms-of-service/" component={TermsOfService} />
+                      <Route path="/success/" component={Success} />
                       <Route path="*" component={NotFound} />
                     </Switch>
                   </Auth0Wrapper>

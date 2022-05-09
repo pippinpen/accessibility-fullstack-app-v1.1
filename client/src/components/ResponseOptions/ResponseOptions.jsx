@@ -5,6 +5,7 @@ import OnlineVenueOptions from "../OnlineVenueOptions/OnlineVenueOptions";
 import MaterialsOptions from "../MaterialsOptions/MaterialsOptions";
 import FoodOptions from "../FoodOptions/FoodOptions";
 import DrinkOptions from "../DrinkOptions/DrinkOptions";
+import ResponseForm from "../ResponseForm/ResponseForm";
 
 
 function ResponseOptions({ event }) {
@@ -17,30 +18,30 @@ function ResponseOptions({ event }) {
   let { title, date, venue, materials, foodDrink} = event.formConfig;
 
   // Conditional rendering accessibility suggestions
-  let venueSuggestions = null;
-  if (venue === "inPerson"){
-    venueSuggestions = <InPersonVenueOptions/>
-  } else {
-    venueSuggestions = <OnlineVenueOptions/>
-  }
+  // let venueSuggestions = null;
+  // if (venue === "inPerson"){
+  //   venueSuggestions = <InPersonVenueOptions/>
+  // } else {
+  //   venueSuggestions = <OnlineVenueOptions/>
+  // }
 
-  let materialsSuggestions = null;
-  if (materials === "yesMaterials"){
-    if (venue === "inPerson"){
-      materialsSuggestions = <MaterialsOptions inPerson="true"/>
-    } else {
-      materialsSuggestions = <MaterialsOptions/>
-    }
-  }
+  // let materialsSuggestions = null;
+  // if (materials === "yesMaterials"){
+  //   if (venue === "inPerson"){
+  //     materialsSuggestions = <MaterialsOptions inPerson="true"/>
+  //   } else {
+  //     materialsSuggestions = <MaterialsOptions/>
+  //   }
+  // }
 
-  let foodDrinkSuggestions = null;
-  if (foodDrink === "food"){
-    foodDrinkSuggestions = <FoodOptions/>
-  } else if (foodDrink === "foodDrink"){
-    foodDrinkSuggestions = <FoodOptions drink="true "/>
-  } else if (foodDrink === "drink" ) {
-    foodDrinkSuggestions = <DrinkOptions/>
-  }
+  // let foodDrinkSuggestions = null;
+  // if (foodDrink === "food"){
+  //   foodDrinkSuggestions = <FoodOptions/>
+  // } else if (foodDrink === "foodDrink"){
+  //   foodDrinkSuggestions = <FoodOptions drink="true "/>
+  // } else if (foodDrink === "drink" ) {
+  //   foodDrinkSuggestions = <DrinkOptions/>
+  // }
 
   return(
     <div
@@ -50,7 +51,7 @@ function ResponseOptions({ event }) {
       <p>Date: {dateFormat(date)}</p>
       <p>ID: {event._id}</p>
       <p>Please answer the following form to tell the event organisers what accessibility provisions they need to provide</p>
-      <div>
+      {/* <div>
         {venueSuggestions}
       </div>
       <div>
@@ -58,8 +59,8 @@ function ResponseOptions({ event }) {
       </div>
       <div>
         {foodDrinkSuggestions}
-      </div>
-
+      </div> */}
+      <ResponseForm formConfig={event.formConfig}/>
     </div>
   );
 }

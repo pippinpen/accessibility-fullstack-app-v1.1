@@ -28,10 +28,12 @@ const eventSchema = new Schema({
         required: true,
       },
     },
-    responses: {
-      type: [String],
-      default: [],
-    }
+    responses: [{
+      venue: {
+        type: String,
+        required: false,
+      },
+    }]
 },
 {timestamps: true}
 );
