@@ -11,16 +11,17 @@ function ViewForm() {
 useEffect(() => {
   if(!attendeeEventLoaded){
     fetchAttendeeEvent(id);
-    return <div>Loading...</div>;
   }
 }, [attendeeEventLoaded, fetchAttendeeEvent, attendeeEvent, id]);
+
+console.log("attendeeEvent?", attendeeEvent)
+console.log("attendeeEventLoaded?", attendeeEventLoaded)
 
   return (
     <>
       <Header />
       <h1>Event Response</h1>
-      {attendeeEvent && <ResponseOptions event={attendeeEvent}/>}
-      
+      {attendeeEventLoaded ? <ResponseOptions event={attendeeEvent}/> : <div>Loading...</div>}
     </>
   );
 }
