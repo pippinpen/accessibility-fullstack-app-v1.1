@@ -6,6 +6,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider } from "@material-ui/styles";
 import theme from "./theme";
 import reportWebVitals from './reportWebVitals';
+import 'normalize.css';
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>

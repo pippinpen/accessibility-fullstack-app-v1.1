@@ -16,6 +16,7 @@ import NavDrawer from "./../NavDrawer/NavDrawer";
 
 import { UIContext } from "./../../contexts/ui.context";
 // import './../Header/Header.css';
+import i from './../../assets/Desktop_white_cropped_200.png'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     paddingBlockEnd: "10vh",
   },
   toolbar: {
-    backgroundColor: "hsl(236, 100%, 19%)",
+    backgroundColor: "hsl(166, 100%, 23%)",
   },
   menuButton: {
     marginRight: "-50px", // Because it off-centers the title (logically -64px)
@@ -39,10 +40,25 @@ const useStyles = makeStyles((theme) => ({
   loginButton: {
     marginLeft: "-75px",
     textTransform: "none",
+    color: "#000",
+    backgroundColor: "hsl(133, 100%, 77%)",
+    "&:hover": {
+        backgroundColor: "#ffff",
+        },
+    borderRadius: "25px",
+    paddingInline: "20px",
   },
   logoutButton: {
     marginLeft: "-75px",
     textTransform: "none",
+    color: "#000",
+    backgroundColor: "hsl(133, 100%, 77%)",
+    "&:hover": {
+        backgroundColor: "#ffff",
+        },
+    borderRadius: "25px",
+    paddingInline: "20px",
+    
   },
   typography: {
     button: {
@@ -76,7 +92,7 @@ export default function Header() {
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant="h1" noWrap>
-            Accessibility App
+            Access<img src={i} alt="A checked box that looks like the letter 'i'" width={20}/>bility
           </Typography>
           {!isAuthenticated ? (
             <Button
@@ -85,7 +101,7 @@ export default function Header() {
               color="inherit"
               aria-label="log in"
               onClick={() => loginWithRedirect()}
-            >Log In
+            >Sign up for free / Log in
             </Button>
           ) : (
             <Button

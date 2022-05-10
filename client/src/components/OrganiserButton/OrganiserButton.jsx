@@ -12,12 +12,15 @@ const OrganiserButton = () => {
   const useStyles = makeStyles((theme) => ({
     
     organiserButton: {
-      width: "50%",
-      backgroundColor: "hsl(51, 98%, 53%)",
-      textTransform: "none",
-      "&:hover": {
-        backgroundColor: "#e7c502",
+    width: "300px",
+    textTransform: "none",
+    color: "#000",
+    backgroundColor: "hsl(133, 100%, 77%)",
+    "&:hover": {
+        backgroundColor: "#ffff",
         },
+    borderRadius: "25px",
+    paddingInline: "20px",
       },
     typography: {
       button: {

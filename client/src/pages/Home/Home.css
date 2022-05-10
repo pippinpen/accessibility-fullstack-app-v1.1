@@ -4,3 +4,38 @@
   align-items: center;
   gap: 3vh;
 }
+
+.landingImg {
+  width: 190px;
+  height: 143px;
+}
+
+h1 .landingHeader{
+  font-size: 22px;
+  width: 286px;
+  margin: 0px;
+}
+
+@media (min-width: 680px) {
+  .landingImg {
+    width: 347px;
+    height: 267px;
+  }
+  h1 .landingHeader{
+    font-size: 40px;
+    width: 638px;
+    margin: 0px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .landingImg {
+    width: 432px;
+    height: 326px;
+  }
+  h1 .landingHeader{
+    font-size: 48px;
+    width: 857px;
+    margin: 0;
+  }
+}

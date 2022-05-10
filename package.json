@@ -8,7 +8,6 @@
     "rimraf": "^3.0.2",
     "yarn": "^1.22.17"
   },
-  "devDependencies": {},
   "scripts": {
     "setup": "concurrently --kill-others-on-fail  \"cd server && yarn\" \"cd client && yarn --network-concurrency 1\"",
     "client:build": "cd client && yarn build && rimraf client/src",
