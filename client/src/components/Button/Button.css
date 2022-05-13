@@ -1,0 +1,33 @@
+.button {
+  font-size: 1rem;
+  color: #000;
+  background-color: hsl(133, 100%, 77%);
+  border-radius: 25px;
+  padding: 15px 20px;
+  border: none;
+}
+
+.button:hover {
+  background-color: "#ffff",
+  }
+
+@media (min-width: 350px) {
+  .button {
+    font-size: 1.2rem;
+    padding: 17px 25px;
+  }
+}
+
+@media (min-width: 600px){
+  .button {
+    font-size: 1.6rem;
+    padding: 20px 35px;
+  }
+}
+
+@media (min-width: 600px) {
+  .button {
+    font-size: 2rem;
+    padding: 20px 40px;
+  }
+}

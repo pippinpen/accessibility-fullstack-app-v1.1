@@ -1,3 +1,56 @@
-body {
-  background-color: hsl(236, 100%, 18%);
+.headerContainer {
+  width: 100%;
+  margin-inline-start: -30px;
+  margin-block-start: -15vh;
+  /* margin-block-start: calc(-15vh + -11.5px); */
+  position: fixed;
+  z-index: 1000;
+}
+
+.headerDisplay {
+  background-color: hsl(166, 100%, 23%);
+  position: static;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: 7px;
+}
+
+.logoContainer {
+  flex-basis: 20%;
+  display: flex;
+  justify-content: center;
+}
+
+.menuContainer,
+.buttonContainer {
+  flex-basis: 40%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.buttonContainer {
+  justify-content: flex-end;
+  align-items: center;
+}
+
+@media (min-width: 350px){
+  .headerDisplay {
+    padding-inline: 15px;
+    min-height: 70px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .headerContainer {
+    margin-inline-start: -70px;
+    margin-block-start: -20vh;
+    /* margin-block-start: calc(-20vh + -11.5px); */
+  }
+  .headerDisplay {
+    padding-inline: 20px;
+    min-height: 100px;
+  }
 }

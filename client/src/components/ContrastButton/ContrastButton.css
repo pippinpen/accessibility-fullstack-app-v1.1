@@ -1,0 +1,30 @@
+.contrastButton {
+  background-color: hsl(166, 100%, 23%);
+  border: 1px solid white;
+  font-size: 0.8rem;
+  color: #fff;
+  border-radius: 25px;
+  padding: 10px 10px;
+}
+
+@media (min-width: 375px){
+  .contrastButton {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 600px){
+  .contrastButton {
+  font-size: 1.6rem;
+  padding: 12px 15px;
+}
+}
+
+@media (min-width: 1000px){
+  .contrastButton {
+  font-size: 1.6rem;
+  padding: 17px 35px;
+  margin-inline-start: 10px;
+  border: 2px solid white;
+}
+}

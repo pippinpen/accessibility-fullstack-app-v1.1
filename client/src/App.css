@@ -1,7 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
+html {
+  font-size: 10px;
+}
+
 body {
   text-align: center;
   min-height: 100vh;
   font-family: 'Inter', sans-serif;
+  padding-inline: 30px;
+  padding-block-start: 15vh;
+}
+
+@media (min-width: 1000px) {
+  body {
+    padding-inline: 70px;
+    padding-block-start: 20vh;
+  }
 }

@@ -1,0 +1,32 @@
+.loginButton {
+  font-size: 0.8rem;
+  color: #000;
+  background-color: hsl(133, 100%, 77%);
+  border-radius: 25px;
+  padding: 10px 10px;
+  border: none;
+}
+
+.loginButton:hover {
+  background-color: "#ffff",
+  }
+
+  @media (min-width: 350px){
+    .loginButton {
+      font-size: 1rem;
+    }
+  }
+
+@media (min-width: 600px){
+  .loginButton {
+    font-size: 1.6rem;
+    padding: 12px 15px;
+  }
+}
+
+@media (min-width: 1000px){
+  .loginButton {
+    font-size: 1.6rem;
+    padding: 17px 35px;
+  }
+}
