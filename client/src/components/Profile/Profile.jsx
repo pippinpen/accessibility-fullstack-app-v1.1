@@ -9,16 +9,17 @@ function Profile() {
   } = useAuth0();
   const dtStyles = {
     fontWeight: 'bold',
+    paddingBottom: '5px',
   };
   const ddStyles = {
     marginLeft: 0,
-    marginBottom: '15px',
+    marginBottom: '5px',
   };
   return (
     isAuthenticated && (
       <>
         <div>
-          <h1>Hello {user.nickname}</h1>
+          <h1 className='pageHeader'>Hello {user.nickname}</h1>
           <img src={picture} alt={name} />
           <dl>
             <dt style={dtStyles}>Email</dt>

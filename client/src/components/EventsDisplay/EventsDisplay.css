@@ -1,0 +1,53 @@
+.eventList {
+  text-align: center;
+  list-style: none;
+  padding: 0px;
+  padding-block-end: 20px;
+}
+
+.eventDisplayTitle {
+  padding-block-start: 50px;
+}
+
+.eventItems>h3,
+.eventItems>p:nth-of-type(1) {
+  text-align: center;
+}
+
+.eventButtons {
+  padding-block-end: 50px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+@media (min-width: 600px) {
+  .eventList {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px
+  }
+}
+
+@media (min-width: 1000px) {
+  .eventDisplayTitle {
+    padding-block-end: 50px;
+  }
+  .eventList {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px
+  }
+  .eventItems {
+    text-align: center;
+  }
+}
+
+@media (min-width: 1400px) {
+  .eventDisplayTitle {
+    padding-block-start: 70px;
+    padding-block-end: 70px;
+  }
+  .eventList {
+    gap: 60px
+  }
+}

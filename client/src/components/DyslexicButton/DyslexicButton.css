@@ -6,7 +6,18 @@
   border-radius: 25px;
   padding: 10px 10px;
   margin-inline-start: 10px;
+  cursor: pointer;
+  transition: all 0.1s ease;
 }
+
+.dyslexicButton:hover {
+  background-color: hsl(166, 100%, 15%);
+  }
+
+.dyslexicButton:focus {
+  background-color: hsl(166, 100%, 15%);
+  outline: 5px solid hsl(25, 100%, 50%);
+  }
 
 @media (min-width: 350px){
   .dyslexicButton {

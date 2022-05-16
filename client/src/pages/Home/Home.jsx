@@ -30,7 +30,7 @@ if (isLoading) return <div>Loading...</div>;
       </div>
       </div>
       <h2 className="tagLine">Commit to accessibility</h2>
-      <h2 className="tagLine">Online or offline, put accessibility at the heart of organising not as an optional add-on</h2>
+      <h2 className="tagLine">Online or in person, put accessibility at the heart of organising not as an optional add-on</h2>
     </>
   );
 }

@@ -3,9 +3,12 @@ import { EventsContext } from "../../contexts/events.context";
 import { makeStyles } from "@material-ui/core/styles";
 import { IconButton } from "@material-ui/core";
 import { DeleteForever, Edit } from "@material-ui/icons"
-import ViewFormButton from "../ViewFormButton.jsx/ViewFormButton";
+// import ViewFormButton from "../ViewFormButton.jsx/ViewFormButton";
 import { Link } from "react-router-dom";
 import dateFormat from "./../../utils/dateFormat"; 
+import Button from "../Button/Button";
+import { useHistory } from "react-router-dom";
+import './EventsDisplay.css';
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -19,12 +22,19 @@ const useStyles = makeStyles((theme) => ({
   },
   eventList: {
     listStyle: "none",
-    padding: 0,
+    padding: 20,
+    paddingBlockEnd: 20,
+    textAlign: "center",
   },
 }));
 
 function EventsDisplay() {
   const classes = useStyles();
+  const history = useHistory();
+  const routeChange = (_id) =>{ 
+    let path = `/view-event/${_id}`; 
+    history.push(path);
+  }
 
   const { events, loaded, fetchEvents, loading, error, deleteEvent } =
     useContext(EventsContext);
@@ -45,9 +55,13 @@ function EventsDisplay() {
 
   return(
     <>
-    <ul className={classes.eventList}>
+    <h2 className="eventDisplayTitle">Your Events</h2>
+    <ul
+    // className={classes.eventList}
+    className="eventList"
+    >
       {events.map(({ _id, formConfig: { title, date } }) => (
-      <li key={_id}>
+      <li key={_id} className="eventItems">
       <h3>{title}</h3>
       <p>{dateFormat(date)}</p>
       <p>ID for attendees: {_id}</p>
@@ -69,7 +83,8 @@ function EventsDisplay() {
           fontSize="large"
           />
         </IconButton>
-        <ViewFormButton _id={_id} />
+        <Button text="View Event" onClick={() => {routeChange(_id)}}/>
+        {/* <ViewFormButton _id={_id} /> */}
       </div>
       </li>
       ))}

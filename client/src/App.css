@@ -18,3 +18,125 @@ body {
     padding-block-start: 20vh;
   }
 }
+
+/* General Font CSS */
+
+h1 {
+  font-size: 2.2rem;
+  padding-block-end: 30px;
+  margin: 0px;
+}
+
+h2, h3, dt {
+  font-size: 1.5rem;
+  padding-block-end: 15px;
+  margin: 0px;
+}
+
+p, li, dd {
+  font-size: 1.2rem;
+  padding-block-end: 10px;
+  margin: 0px;
+}
+
+ul {
+  padding-inline-start: 20px;
+}
+
+li {
+  text-align: left;
+}
+
+@media (min-width: 350px) {
+  h2, h3, dt {
+    font-size: 1.8rem;
+  }
+  p, li, dd {
+    font-size: 1.4rem;
+  }
+  ul {
+    padding-inline-start: 30px;
+  }
+}
+
+@media (min-width: 600px) {
+  h1 {
+    font-size: 2.8rem;
+    padding-block-end: 40px;
+  }
+  h2, h3, dt {
+    font-size: 1.8rem;
+    padding-block-end: 20px;
+  }
+  p, li, dd {
+    font-size: 1.5rem;
+    padding-block-end: 15px;
+  }
+  ul {
+    padding-inline-start: 60px;
+  }
+}
+
+@media (min-width: 1000px) {
+  h1 {
+    font-size: 3rem;
+    padding-block-end: 50px;
+  }
+  h2, h3{
+    font-size: 2.2rem;
+    padding-block-end: 30px;
+  }
+  p, dt {
+    font-size: 1.6rem;
+    padding-block-end: 20px;
+  }
+  ul {
+    padding-inline-start: 100px;
+  }
+}
+
+/* Page CSS */
+
+.pageHeader {
+  font-size: 2.2rem;
+  padding-block-end: 30px;
+  margin: 0px;
+}
+
+@media (min-width: 375px) {
+  .pageContainer {
+    padding-inline: 10px;
+  }
+}
+
+@media (min-width: 600px) {
+  .pageHeader {
+    font-size: 2.8rem;
+    padding-block-end: 40px;
+  }
+  .pageContainer {
+    padding-inline: 50px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .pageHeader {
+    font-size: 3rem;
+    padding-block-end: 50px;
+  }
+  .pageContainer {
+    padding-inline: 70px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .pageContainer {
+    padding-inline: 100px;
+  }
+}
+
+@media (min-width: 2000px) {
+  .pageContainer {
+    padding-inline: 400px;
+  }
+}

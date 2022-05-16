@@ -1,9 +1,10 @@
 .headerContainer {
   width: 100%;
-  margin-inline-start: -30px;
-  margin-block-start: -15vh;
-  /* margin-block-start: calc(-15vh + -11.5px); */
+  /* margin-inline-start: -30px; */
+  /* margin-block-start: -15vh; */
   position: fixed;
+  top: 0;
+  left: 0;
   z-index: 1000;
 }
 
@@ -21,6 +22,10 @@
   flex-basis: 20%;
   display: flex;
   justify-content: center;
+}
+
+.logoTitle {
+  padding: 0;
 }
 
 .menuContainer,
@@ -44,11 +49,10 @@
 }
 
 @media (min-width: 1000px) {
-  .headerContainer {
-    margin-inline-start: -70px;
-    margin-block-start: -20vh;
-    /* margin-block-start: calc(-20vh + -11.5px); */
-  }
+  /* .headerContainer { */
+    /* margin-inline-start: -70px;
+    margin-block-start: -20vh; */
+  /* } */
   .headerDisplay {
     padding-inline: 20px;
     min-height: 100px;

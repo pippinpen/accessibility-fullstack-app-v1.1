@@ -5,10 +5,17 @@
   border-radius: 25px;
   padding: 10px 10px;
   border: none;
+  cursor: pointer;
+  transition: all 0.1s ease;
 }
 
 .loginButton:hover {
-  background-color: "#ffff",
+  background-color: hsl(132, 100%, 86%);
+  }
+
+.loginButton:focus {
+  background-color: hsl(132, 100%, 86%);
+  outline: 5px solid hsl(25, 100%, 50%);
   }
 
   @media (min-width: 350px){
