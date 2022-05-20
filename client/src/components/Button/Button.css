@@ -18,10 +18,17 @@
   outline: 5px solid hsl(25, 100%, 50%);
   }
 
+.secondaryButton {
+  padding: 10px 15px;
+}
+
 @media (min-width: 350px) {
   .button {
     font-size: 1.2rem;
     padding: 17px 25px;
+  }
+  .secondaryButton {
+    padding: 15px 25px;
   }
 }
 
@@ -30,11 +37,19 @@
     font-size: 1.6rem;
     padding: 20px 35px;
   }
+  .secondaryButton {
+    font-size: 1.4rem;
+    padding: 17px 30px;
+  }
 }
 
-@media (min-width: 600px) {
+@media (min-width: 1000px) {
   .button {
     font-size: 2rem;
     padding: 20px 40px;
+  }
+  .secondaryButton {
+    font-size: 1.6rem;
+    padding: 15px 20px;
   }
 }

@@ -8,6 +8,7 @@ function AccessibilityStatement() {
   return (
     <>
       <Header />
+      <main>
       <h1 className="pageHeader">Accessibility Commitment Statement</h1>
       <div className="pageContainer">
         <p>
@@ -99,6 +100,7 @@ function AccessibilityStatement() {
         <h2>Preparation of this accessibility statement</h2>
         <p>This statement was prepared on 3rd May 2022.</p>
       </div>
+      </main>
     </>
   );
 }

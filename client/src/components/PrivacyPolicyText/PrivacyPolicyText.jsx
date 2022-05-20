@@ -37,6 +37,12 @@ function PrivacyPolicyText() {
             In this privacy policy, the following definitions are used:
             <table>
               <tbody>
+              <tr>
+                  <th>Word</th>
+                  <th>
+                    Definition
+                  </th>
+                </tr>
                 <tr>
                   <td>Data</td>
                   <td>

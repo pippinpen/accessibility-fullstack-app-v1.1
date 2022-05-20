@@ -6,8 +6,10 @@ function FindEvent() {
   return (
     <>
       <Header />
+      <main className='pageContainer'>
       <h1>Find the event you're attending</h1>
       <FindEventForm/>
+      </main>
     </>
   );
 }

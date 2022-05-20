@@ -18,11 +18,11 @@ const eventToBeUpdated = events.find((event) => event._id === id);
 const formConfig = eventToBeUpdated.formConfig;
   return (
     <>
-    <div>
       <Header/>
+      <main className='pageContainer'>
       <p>Edit Event Page</p>
       <EventForm initialValues={formConfig}/>
-    </div>
+      </main>
     </>
   );
 }

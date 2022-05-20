@@ -9,7 +9,9 @@ function TermsOfService() {
   return (
     <>
       <Header />
+      <main>
       <TermsOfServiceText/>
+      </main>
     </>
   );
 }

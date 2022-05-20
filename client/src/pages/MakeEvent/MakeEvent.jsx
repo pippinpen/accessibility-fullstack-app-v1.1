@@ -5,11 +5,11 @@ import Header from '../../components/Header/Header';
 function MakeEvent() {
   return (
     <>
-    <div>
       <Header/>
+      <main className='pageContainer'>
       <p>Make Event Page</p>
       <EventForm/>
-    </div>
+      </main>
     </>
   );
 }

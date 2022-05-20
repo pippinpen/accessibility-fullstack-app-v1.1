@@ -20,10 +20,11 @@ if (isLoading) return <div>Loading...</div>;
 
   return (
     <>
+    <main>
       <Header />
       <h1 className="landingHeader">Make your event accessible with our free online form builder</h1>
       <div className="imgContainer">
-      <img src={landingImg} alt="An individual in a wheelchair with another individual walking towards them with an outstretched hand on a street, in an abstract style" className="landingImg"/>
+      <img src={landingImg} alt="An individual in a wheelchair with another individual walking towards them with an outstretched hand on a street, in an abstract style. Illustration called 'Disabled Care', designed by Alex Manokhi" className="landingImg"/>
       <div className="homeButtons">
       <Button text="I am organising an accessible event" onClick={() => loginWithRedirect()}/>
       <Button text="I am attending an accessible event" onClick={routeChange}/>
@@ -31,6 +32,7 @@ if (isLoading) return <div>Loading...</div>;
       </div>
       <h2 className="tagLine">Commit to accessibility</h2>
       <h2 className="tagLine">Online or in person, put accessibility at the heart of organising not as an optional add-on</h2>
+      </main>
     </>
   );
 }

@@ -91,3 +91,15 @@
     padding-inline: 400px;
   }
 }
+
+@media (min-width: 1500px) {
+  .landingHeader{
+    padding-inline: 300px;
+  }
+}
+
+@media (min-width: 2500px) {
+  .landingHeader{
+    padding-inline: 750px;
+  }
+}

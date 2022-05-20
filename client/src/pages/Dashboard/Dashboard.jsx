@@ -15,14 +15,12 @@ function Dashboard() {
   }
   return (
     <>
-    <div>
       <Header/>
-      <div className='pageContainer'>
+      <main className='pageContainer'>
       <Profile />
       <Button className="makeEventButton" text="Make an Event" onClick={routeChange}/>
       <EventsDisplay/>
-      </div>
-    </div>
+      </main>
     </>
   );
 }

@@ -106,6 +106,7 @@ li {
 @media (min-width: 375px) {
   .pageContainer {
     padding-inline: 10px;
+    padding-block-end: 5vh;
   }
 }
 
@@ -116,6 +117,7 @@ li {
   }
   .pageContainer {
     padding-inline: 50px;
+    padding-block-end: 10vh;
   }
 }
 

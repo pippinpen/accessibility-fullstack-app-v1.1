@@ -9,7 +9,9 @@ function PrivacyPolicy() {
   return (
     <>
       <Header />
+      <main>
 			<PrivacyPolicyText/>
+      </main>
     </>
   );
 }

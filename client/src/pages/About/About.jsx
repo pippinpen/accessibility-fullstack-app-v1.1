@@ -9,6 +9,7 @@ function About() {
   return (
     <>
       <Header />
+      <main>
       <h1 className="pageHeader">About Accessibility App</h1>
       <div className="pageContainer">
       <h2>Mission Statement</h2>
@@ -16,8 +17,10 @@ function About() {
       <p>This app puts the onus on organisers to ask attendees for their access requirements. Flipping the script from positioning accessibility as asking for a 'favour' or an optional add-on, this app generates forms for organisers to collate and allocate resources that they need to fulfill attendees access needs.</p>
       <h2>Creator</h2>
       <p>This app was designed and developed by Pippin Burkett. Pippin cares about co-creation, institutional pedagogy and using tech as a force for good. See more of Pip's work at <a href="https://pippin.codes/">pippin.codes</a> or talk to Pip by emailing hello (at) pippin.codes</p>
-      
+      <h3>Illustrations</h3>
+      <cite>Many thanks to <a href="https://icons8.com/illustrations/author/VKgWUPlqQ7Ea">Alex Manokhi</a> for the beautiful Disabled Care illustrations.</cite>
       </div>
+      </main>
     </>
   );
 }

@@ -607,7 +607,7 @@ function TermsOfServiceText() {
         pippin.codes
       </p>
       <h2>Creation of these Terms of Service</h2>
-      <p>These terms of Service were creates on the 5th of May 2022.</p>
+      <p>These terms of Service were created on the 5th of May 2022.</p>
       </div>
     </>
   );

@@ -20,8 +20,12 @@ console.log("attendeeEventLoaded?", attendeeEventLoaded)
   return (
     <>
       <Header />
+      <main>
       <h1>Event Response</h1>
+      <div className='pageContainer'>
       {attendeeEventLoaded ? <ResponseOptions event={attendeeEvent}/> : <div>Loading...</div>}
+      </div>
+      </main>
     </>
   );
 }

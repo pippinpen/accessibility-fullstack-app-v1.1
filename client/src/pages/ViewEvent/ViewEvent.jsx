@@ -29,11 +29,15 @@ useEffect(() => {
   return (
     <>
       <Header />
+      <main>
       <h1>Your Event</h1>
+      <div className='pageContainer'>
       <h2>Your Event's Responses</h2>
       <EventResponseDisplay responses={responses}/>
       <h2>Your Event's Accessibility Options</h2>
       <EventOptionsDisplay event={event}/>
+      </div>
+      </main>
     </>
   );
 }

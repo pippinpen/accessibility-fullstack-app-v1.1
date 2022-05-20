@@ -15,11 +15,12 @@ function Success() {
   return (
     <>
       <Header />
+      <main className='pageContainer'>
       <h1>Thank you!</h1>
       <p>Accessibility requirements sent for {title} on the {formattedDate}</p>
       <p>Thank you for submitting your accessibility requirements to your event organiser.</p>
       <p>Want to learn more about accessibility? Look at our <Link to="/resources">resources</Link> to find out more.</p>
-      
+      </main>
     </>
   );
 }
