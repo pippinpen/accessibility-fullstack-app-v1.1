@@ -1,5 +1,4 @@
 import React from 'react'
-import AssistanceOptions from '../AssistanceOptions/AssistanceOptions'
 
 const OnlineVenueOptions = () => {
   return (
@@ -9,7 +8,6 @@ const OnlineVenueOptions = () => {
     <ul>
     <li>Zoom suggestions & Online suggestions</li>
     </ul>
-    <AssistanceOptions/>
     </>
   )
 }

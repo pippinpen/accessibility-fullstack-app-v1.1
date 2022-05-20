@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import { EventsContext } from "../../contexts/events.context";
-import { makeStyles } from "@material-ui/core/styles";
+// import { makeStyles } from "@material-ui/core/styles";
 import { IconButton } from "@material-ui/core";
 import { DeleteForever, Edit } from "@material-ui/icons"
 // import ViewFormButton from "../ViewFormButton.jsx/ViewFormButton";
@@ -10,26 +10,26 @@ import Button from "../Button/Button";
 import { useHistory } from "react-router-dom";
 import './EventsDisplay.css';
 
-const useStyles = makeStyles((theme) => ({
-  button: {
-    margin: theme.spacing(1),
-  },
-  formRow: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-    display: "flex",
-    justifyContent: "center",
-  },
-  eventList: {
-    listStyle: "none",
-    padding: 20,
-    paddingBlockEnd: 20,
-    textAlign: "center",
-  },
-}));
+// const useStyles = makeStyles((theme) => ({
+//   button: {
+//     margin: theme.spacing(1),
+//   },
+//   formRow: {
+//     margin: theme.spacing(1),
+//     minWidth: 120,
+//     display: "flex",
+//     justifyContent: "center",
+//   },
+//   eventList: {
+//     listStyle: "none",
+//     padding: 20,
+//     paddingBlockEnd: 20,
+//     textAlign: "center",
+//   },
+// }));
 
 function EventsDisplay() {
-  const classes = useStyles();
+  // const classes = useStyles();
   const history = useHistory();
   const routeChange = (_id) =>{ 
     let path = `/view-event/${_id}`; 

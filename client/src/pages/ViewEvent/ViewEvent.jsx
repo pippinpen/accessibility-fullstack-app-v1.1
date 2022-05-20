@@ -4,6 +4,7 @@ import EventOptionsDisplay from '../../components/EventOptionsDisplay/EventOptio
 import { useParams } from "react-router-dom";
 import { EventsContext } from './../../contexts/events.context';
 import EventResponseDisplay from '../../components/EventResponsesDisplay/EventResponsesDisplay';
+import dateFormat from '../../utils/dateFormat';
 
 function ViewEvent() {
 
@@ -29,14 +30,14 @@ useEffect(() => {
   return (
     <>
       <Header />
-      <main>
-      <h1>Your Event</h1>
-      <div className='pageContainer'>
+      <main className='pageContainer'>
+      <h1>{event.formConfig.title}</h1>
+      <p>{dateFormat(event.formConfig.date)}</p>
+      <p>ID: {event._id}</p>
       <h2>Your Event's Responses</h2>
       <EventResponseDisplay responses={responses}/>
       <h2>Your Event's Accessibility Options</h2>
       <EventOptionsDisplay event={event}/>
-      </div>
       </main>
     </>
   );

@@ -10,15 +10,14 @@ const MaterialsOptions = ( {inPerson} ) => {
       <li>Dsylexic font version of materials</li> 
       <li>Large font and high contrast version of materials</li>
       <li>Digital version of materials</li></ul>
-      {inPerson ?
+      {inPerson &&
       <>
       <p>Because your event is also in person:</p>
       <ul>
       <li>Paper copy of materials</li>
       <li>Braille copy of materials</li>
       <li><a href="https://www.teachingvisuallyimpaired.com/labeling-system.html">Tactile labelling</a> of materials</li></ul>
-      </>
-      : null }
+      </>}
     </div>
   )
 }

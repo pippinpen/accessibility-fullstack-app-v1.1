@@ -15,16 +15,24 @@ const eventSchema = new Schema({
         type: Date,
         required: true,
       },
-      venue: {
-        type: String,
+      isOnline: {
+        type: Boolean,
         required: true,
       },
-      materials: {
-        type: String,
+      isInPerson: {
+        type: Boolean,
         required: true,
       },
-      foodDrink: {
-        type: String,
+      hasMaterials: {
+        type: Boolean,
+        required: true,
+      },
+      hasFood: {
+        type: Boolean,
+        required: true,
+      },
+      hasDrink: {
+        type: Boolean,
         required: true,
       },
     },
