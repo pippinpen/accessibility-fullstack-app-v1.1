@@ -159,8 +159,8 @@ export const EventsProvider = (props) => {
   const addEvent = useCallback(
     async (formData) => {
       if(!accessToken) return;
-      console.log("headers", headers);
-      console.log("accessToken", accessToken);
+      // console.log("headers", headers);
+      // console.log("accessToken", accessToken);
       setLoading();
       const { events } = state;
       try {
@@ -175,7 +175,7 @@ export const EventsProvider = (props) => {
           throw response;
         }
         const savedEvent = await response.json();
-        console.log("got data", savedEvent);
+        // console.log("got data", savedEvent);
         setEvents([...events, savedEvent]);
         addToast(`Saved ${savedEvent.formConfig.title}`, {
           appearance: "success",
@@ -193,7 +193,7 @@ export const EventsProvider = (props) => {
 
   const updateAttendeeResponse = useCallback(
     async (id, updates) => {
-      console.log('update attendee response event context', updates)
+      // console.log('update attendee response event context', updates)
       setLoading();
       const { attendeeEvent } = state;
       try {
@@ -213,10 +213,10 @@ export const EventsProvider = (props) => {
         //   oldResponses
         // );
 
-        console.log(
-          "🚀 ~ file: events.context.js ~ line 99 ~ updateAttendeeResponses ~ newResponse",
-          updates
-        );
+        // console.log(
+        //   "🚀 ~ file: events.context.js ~ line 99 ~ updateAttendeeResponses ~ newResponse",
+        //   updates
+        // );
         // recreate the responses array
         const updatedAttendeeEvent = {
           ...attendeeEvent,
@@ -229,10 +229,10 @@ export const EventsProvider = (props) => {
         //   ...oldResponses,
         // ];
         // updatedResponses.push(updates);
-        console.log(
-          "🚀 ~ file: event.context.js ~ line 120 ~ updatedEvents",
-          updatedAttendeeEvent
-        );
+        // console.log(
+        //   "🚀 ~ file: event.context.js ~ line 120 ~ updatedEvents",
+        //   updatedAttendeeEvent
+        // );
         setAttendeeEvent(updatedAttendeeEvent);
         fetchEvents();
         addToast(`Response added to ${attendeeEvent.formConfig.title}`, {
@@ -251,7 +251,7 @@ export const EventsProvider = (props) => {
 
     const updateEvent = useCallback(
       async (id, updates) => {
-        console.log('updates event context', updates)
+        // console.log('updates event context', updates)
         if(!accessToken) return;
         let newEvent = null;
         setLoading();
@@ -272,10 +272,10 @@ export const EventsProvider = (props) => {
   
           // Get actual event
           const oldEvent = events[index];
-          console.log(
-            "🚀 ~ file: events.context.js ~ line 95 ~ updateEvent ~ oldEvent",
-            oldEvent
-          );
+          // console.log(
+          //   "🚀 ~ file: events.context.js ~ line 95 ~ updateEvent ~ oldEvent",
+          //   oldEvent
+          // );
   
           // Merge with updates
           newEvent = {
@@ -285,20 +285,20 @@ export const EventsProvider = (props) => {
               ...updates,
             },
           };
-          console.log(
-            "🚀 ~ file: events.context.js ~ line 99 ~ updateEventt ~ newEventt",
-            newEvent
-          );
+          // console.log(
+          //   "🚀 ~ file: events.context.js ~ line 99 ~ updateEventt ~ newEventt",
+          //   newEvent
+          // );
           // recreate the events array
           const updatedEvents = [
             ...events.slice(0, index),
             newEvent,
             ...events.slice(index + 1),
           ];
-          console.log(
-            "🚀 ~ file: event.context.js ~ line 120 ~ updatedEvents",
-            updatedEvents
-          );
+          // console.log(
+          //   "🚀 ~ file: event.context.js ~ line 120 ~ updatedEvents",
+          //   updatedEvents
+          // );
           setEvents(updatedEvents);
           addToast(`Updated ${newEvent.formConfig.title}`, {
             appearance: "success",

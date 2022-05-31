@@ -105,7 +105,7 @@ function EventForm({ initialValues }) {
           }
         }
       }
-      console.log("updates", updates);
+      // console.log("updates", updates);
       updateEvent(id, updates);
     } else {
       addEvent(formValues);
@@ -113,9 +113,6 @@ function EventForm({ initialValues }) {
     reset(defaultValues);
     routeChange();
   };
-
-  console.log("isValid?", isValid);
-  console.log("isDirty?", isDirty);
 
   // return (
   //   <>

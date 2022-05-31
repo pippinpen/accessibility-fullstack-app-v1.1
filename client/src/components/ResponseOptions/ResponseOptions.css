@@ -1,0 +1,6 @@
+.formButtonContainer {
+  display: flex;
+  justify-content: center;
+  padding-block: 30px;
+  gap: 15px;
+}

@@ -13,7 +13,7 @@ import './../Header/Header.css';
 import LoginButton from "../LoginButton/LoginButton";
 import LogoutButton from "../LogoutButton/LogoutButton";
 import SiteLogo from "../SiteLogo/SiteLogo";
-import HeaderOptions from "../HeaderOptions/HeaderOptions";
+// import HeaderOptions from "../HeaderOptions/HeaderOptions";
 
 const useStyles = makeStyles((theme) => ({
   menuButton: {
@@ -44,7 +44,7 @@ export default function Header() {
             fontSize="large"
             />
           </IconButton>
-          <HeaderOptions/>
+          {/* <HeaderOptions/> */}
           </div>
           <div className="logoContainer">
             <SiteLogo/>

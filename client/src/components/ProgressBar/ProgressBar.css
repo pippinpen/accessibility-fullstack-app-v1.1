@@ -1,0 +1,37 @@
+progress {
+  border: 0;
+  height: 20px;
+  border-radius: 10px;
+  width: 60%;
+}
+
+progress::-webkit-progress-bar {
+  border: 0;
+  height: 20px;
+  border-radius: 10px;
+  background-color: hsl(0, 0%, 84%);
+}
+progress::-webkit-progress-value {
+  border: 0;
+  height: 20px;
+  border-radius: 10px;
+  background-color: hsl(166, 100%, 23%);
+}
+progress::-moz-progress-bar {
+  border: 0;
+  height: 20px;
+  border-radius: 10px;
+  background-color: hsl(0, 0%, 84%);
+}
+
+progress::-moz-progress-value {
+  border: 0;
+  height: 20px;
+  border-radius: 10px;
+  background-color: hsl(166, 100%, 23%);
+}
+
+.progressContainer {
+  display: flex;
+  justify-content: center;
+}

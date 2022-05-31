@@ -11,7 +11,9 @@ const InPersonVenueOptions = () => {
     <li>Wide routes throughout the venue for attendees using wheelchairs, mobility scooters or other mobility aids</li>
     <li>Seating space for mobility aids for attendees using wheelchairs, mobility scooters or other mobility aids as seats</li>
     <li>Quiet area for those who need to take medicine or reduce sensory overload</li>
-    <li>Seats near power sources to charge specialist equipment</li></ul>
+    <li>Seats near power sources to charge specialist equipment</li>
+    <li>Outline routes to nearest disabled toilets and quiet areas</li>
+    </ul>
     </>
   )
 }

@@ -7,7 +7,7 @@ import dateFormat from '../../utils/dateFormat';
 function Success() {
   const { attendeeEvent } = useContext(EventsContext);
 
-  console.log(attendeeEvent)
+  // console.log(attendeeEvent)
 
   const { title, date } = attendeeEvent.formConfig;
   const formattedDate = dateFormat(date);

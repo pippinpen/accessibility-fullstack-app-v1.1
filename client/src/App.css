@@ -142,3 +142,9 @@ li {
     padding-inline: 400px;
   }
 }
+
+/* Form CSS */
+.MuiFormGroup-root,
+.MuiFormGroup-root {
+  justify-content: center;
+}

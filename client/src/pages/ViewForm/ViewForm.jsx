@@ -14,8 +14,6 @@ useEffect(() => {
   }
 }, [attendeeEventLoaded, fetchAttendeeEvent, attendeeEvent, id]);
 
-console.log("attendeeEvent?", attendeeEvent)
-console.log("attendeeEventLoaded?", attendeeEventLoaded)
 
   return (
     <>
@@ -23,7 +21,7 @@ console.log("attendeeEventLoaded?", attendeeEventLoaded)
       <main>
       <h1>Event Response</h1>
       <div className='pageContainer'>
-      {attendeeEventLoaded ? <ResponseOptions event={attendeeEvent}/> : <div>Loading...</div>}
+      {attendeeEventLoaded ? <ResponseOptions event={attendeeEvent} id={id}/> : <div>Loading...</div>}
       </div>
       </main>
     </>
