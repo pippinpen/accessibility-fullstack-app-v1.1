@@ -6,7 +6,7 @@ import { EventsContext } from './../../contexts/events.context';
 
 function ViewForm() {
   let { id } = useParams();
-  const { attendeeEvent, attendeeEventLoaded, fetchAttendeeEvent } = useContext(EventsContext);
+  const { attendeeEvent, attendeeEventLoaded, fetchAttendeeEvent, loading, error } = useContext(EventsContext);
 
 useEffect(() => {
   if(!attendeeEventLoaded){
@@ -21,7 +21,9 @@ useEffect(() => {
       <main>
       <h1>Event Response</h1>
       <div className='pageContainer'>
-      {attendeeEventLoaded ? <ResponseOptions event={attendeeEvent} id={id}/> : <div>Loading...</div>}
+      {attendeeEventLoaded && <ResponseOptions event={attendeeEvent} id={id}/>}
+      {loading && <div>Loading...</div>}
+      {error && <div>I'm afraid we can't find that event. Error: {error}</div>}
       </div>
       </main>
     </>

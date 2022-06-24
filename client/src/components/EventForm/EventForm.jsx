@@ -94,7 +94,7 @@ function EventForm({ initialValues }) {
   }
 
   const onSubmit = async (formValues) => {
-    console.log("formValues", formValues);
+    // console.log("formValues", formValues);
 
     if (populated) { 
       const updates = {};

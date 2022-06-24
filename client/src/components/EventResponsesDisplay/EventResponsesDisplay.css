@@ -1,0 +1,10 @@
+/* .responsesContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1vw 4vw;
+} */
+
+.responsesContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}

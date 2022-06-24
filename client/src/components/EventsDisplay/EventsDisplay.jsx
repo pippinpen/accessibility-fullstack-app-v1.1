@@ -84,7 +84,6 @@ function EventsDisplay() {
           />
         </IconButton>
         <Button secondaryButton="true" text="View Event" onClick={() => {routeChange(_id)}}/>
-        {/* <ViewFormButton _id={_id} /> */}
       </div>
       </li>
       ))}

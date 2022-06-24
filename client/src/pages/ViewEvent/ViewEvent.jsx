@@ -25,7 +25,7 @@ useEffect(() => {
 
   const { responses } = event;
 
-  console.log(responses);
+  // console.log(responses);
 
   return (
     <>
@@ -34,9 +34,9 @@ useEffect(() => {
       <h1>{event.formConfig.title}</h1>
       <p>{dateFormat(event.formConfig.date)}</p>
       <p>ID: {event._id}</p>
-      <h2>Your Event's Responses</h2>
+      <h2>Your Event's Attendee Responses</h2>
       <EventResponseDisplay responses={responses}/>
-      <h2>Your Event's Accessibility Options</h2>
+      <h2>All Potential Accessibility Options for your Event</h2>
       <EventOptionsDisplay event={event}/>
       </main>
     </>

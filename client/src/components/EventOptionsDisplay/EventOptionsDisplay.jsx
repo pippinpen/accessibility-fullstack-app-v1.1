@@ -15,7 +15,7 @@ function EventOptionsDisplay({ event }) {
 
   return(
     <div>
-      <p>With your particular type of event, the following accessibility options should be offered.</p>
+      <p>With your particular type of event, the following options are all accessibility requirements that could be offered. These are options are what your attendees are able to ask for.</p>
       {isOnline && <OnlineVenueOptions/>}
       {isInPerson && <InPersonVenueOptions/>}
       <AssistanceOptions inPerson={isInPerson}/>

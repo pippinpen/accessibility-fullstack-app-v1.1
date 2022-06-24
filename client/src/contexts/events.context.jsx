@@ -1,11 +1,11 @@
-import React, { createContext, useState, useCallback, useContext } from "react";
-import { AuthContext } from "./auth.context";
-import { useToasts } from "react-toast-notifications";
-
+import React, { createContext, useState, useCallback, useContext } from 'react';
+import { AuthContext } from './auth.context';
+import { useToasts } from 'react-toast-notifications';
+import shouldPoll from '../utils/shouldPoll';
+import { useEffect } from 'react';
 
 let headers = {
-  "Content-Type": "application/json",
-  // 'Content-Type': 'application/x-www-form-urlencoded',
+  'Content-Type': 'application/json',
 };
 
 export const EventsContext = createContext({
@@ -24,11 +24,7 @@ export const EventsContext = createContext({
 });
 
 export const EventsProvider = (props) => {
-  const {
-    accessToken,
-  } = useContext(AuthContext);
-  
-  // console.log('AccessToken', accessToken);
+  const { accessToken } = useContext(AuthContext);
 
   const [state, setState] = useState({
     loading: false,
@@ -36,11 +32,17 @@ export const EventsProvider = (props) => {
     attendeeEventLoaded: false,
     error: null,
     events: [],
-    attendeeEvent: {}, 
+    attendeeEvent: {},
   });
 
-  const {loading, error, events, eventsLoaded, attendeeEvent, attendeeEventLoaded} = state;
-  // console.log('rerendering', {loading, error, events, eventsLoaded});
+  const {
+    loading,
+    error,
+    events,
+    eventsLoaded,
+    attendeeEvent,
+    attendeeEventLoaded,
+  } = state;
 
   const setLoading = useCallback(
     () =>
@@ -48,7 +50,7 @@ export const EventsProvider = (props) => {
         ...state,
         loading: true,
       }),
-    [state]
+    [state],
   );
 
   const setEvents = useCallback(
@@ -60,7 +62,7 @@ export const EventsProvider = (props) => {
         loading: false,
         eventsLoaded: true,
       }),
-    [state]
+    [state],
   );
 
   const setAttendeeEvent = useCallback(
@@ -72,7 +74,7 @@ export const EventsProvider = (props) => {
         loading: false,
         attendeeEventLoaded: true,
       }),
-    [state]
+    [state],
   );
 
   const setError = useCallback(
@@ -83,33 +85,48 @@ export const EventsProvider = (props) => {
         loading: false,
         eventsLoaded: true,
       }),
-    [state]
+    [state],
   );
 
-  // const [search, setSearch] = useState("");
   const { addToast } = useToasts();
 
+  // Polling timer
+  const [pollingData, setPollingData] = useState({
+    minPollingMilliseconds: 60 * 1000,
+    maxPollingMilliseconds: 300 * 1000,
+    lastUpdateTime: Date.now(),
+    dataHasChanged: false,
+  });
+
+  useEffect(() => {
+    setInterval(() => {
+      if (
+        shouldPoll(
+          pollingData.minPollingMilliseconds,
+          pollingData.maxPollingMilliseconds,
+          pollingData.lastUpdateTime,
+          pollingData.dataHasChanged,
+        )
+      ) {
+        fetchEvents();
+      } else {
+        return;
+      }
+    }, pollingData.minPollingMilliseconds);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const fetchEvents = useCallback(async () => {
-    // console.log('loading', loading);
-    // console.log('error', error);
-
-
-    // Polling
-    setTimeout(()=>{
-    fetchEvents()
-    }, 60000);
-
     const { loading, eventsLoaded, error } = state;
 
-    if (loading || eventsLoaded || error || !accessToken ) {
+    if (loading || eventsLoaded || error || !accessToken) {
       return;
     }
 
     setLoading();
 
     try {
-      const response = await fetch("/api/v1/events", {
+      const response = await fetch('/api/v1/events', {
         headers: accessToken
           ? { ...headers, Authorization: `Bearer ${accessToken}` }
           : headers,
@@ -118,54 +135,66 @@ export const EventsProvider = (props) => {
         throw response;
       }
       const data = await response.json();
-      setEvents(data);
-      // console.log('events from context', events);
+      if (JSON.stringify(data) !== JSON.stringify(events)) {
+        setEvents(data);
+        setPollingData({
+          ...pollingData,
+          lastUpdateTime: Date.now(),
+          dataHasChanged: true,
+        });
+      }
+      setPollingData({
+        ...pollingData,
+        lastUpdateTime: Date.now(),
+        dataHasChanged: false,
+      });
     } catch (err) {
-      console.log("err", err);
+      console.log('err', err);
       setError(err);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [accessToken, setError, setLoading, setEvents, state]);
 
-  const fetchAttendeeEvent = useCallback(async (id) => {
+  const fetchAttendeeEvent = useCallback(
+    async (id) => {
+      const { loading, attendeeEventLoaded, error } = state;
 
-    const { loading, attendeeEventLoaded, error } = state;
-
-    if (loading || attendeeEventLoaded || error) {
-      return;
-    }
-
-    setLoading();
-
-    try {
-      const response = await fetch(`/api/v1/events/view-form/${id}`, {
-        method: 'GET',
-        headers
-        }
-        );
-      if (!response.ok) {
-        throw response;
+      if (loading || attendeeEventLoaded || error) {
+        return;
       }
-      const dataArray = await response.json();
-      let [ eventData ] = dataArray;
-      setAttendeeEvent(eventData);
-      // console.log('events from context', events);
-    } catch (err) {
-      console.log("err", err);
-      setError(err);
-    }
-  }, [setError, setLoading, setAttendeeEvent, state]);
 
+      setLoading();
+
+      try {
+        const response = await fetch(`/api/v1/events/view-form/${id}`, {
+          method: 'GET',
+          headers,
+        });
+        if (!response.ok) {
+          throw response;
+        }
+        const dataArray = await response.json();
+        let [eventData] = dataArray;
+        setAttendeeEvent(eventData);
+        // console.log('events from context', events);
+      } catch (err) {
+        console.log('err', err);
+        setError(err);
+      }
+    },
+    [setError, setLoading, setAttendeeEvent, state],
+  );
 
   const addEvent = useCallback(
     async (formData) => {
-      if(!accessToken) return;
+      if (!accessToken) return;
       // console.log("headers", headers);
       // console.log("accessToken", accessToken);
       setLoading();
       const { events } = state;
       try {
-        const response = await fetch("/api/v1/events", {
-          method: "POST",
+        const response = await fetch('/api/v1/events', {
+          method: 'POST',
           headers: accessToken
             ? { ...headers, Authorization: `Bearer ${accessToken}` }
             : headers,
@@ -178,17 +207,17 @@ export const EventsProvider = (props) => {
         // console.log("got data", savedEvent);
         setEvents([...events, savedEvent]);
         addToast(`Saved ${savedEvent.formConfig.title}`, {
-          appearance: "success",
+          appearance: 'success',
         });
       } catch (err) {
         console.log(err);
         setError(err);
         addToast(`Error ${err.message || err.statusText}`, {
-          appearance: "error",
+          appearance: 'error',
         });
       }
     },
-    [accessToken, addToast, setLoading, setError,setEvents, state]
+    [accessToken, addToast, setLoading, setError, setEvents, state],
   );
 
   const updateAttendeeResponse = useCallback(
@@ -198,7 +227,7 @@ export const EventsProvider = (props) => {
       const { attendeeEvent } = state;
       try {
         const response = await fetch(`/api/v1/events/event-response/${id}`, {
-          method: "PUT",
+          method: 'PUT',
           headers,
           body: JSON.stringify(updates),
         });
@@ -220,10 +249,7 @@ export const EventsProvider = (props) => {
         // recreate the responses array
         const updatedAttendeeEvent = {
           ...attendeeEvent,
-          responses: [
-            ...attendeeEvent.responses,
-            updates,
-          ],
+          responses: [...attendeeEvent.responses, updates],
         };
         // const updatedResponses = [
         //   ...oldResponses,
@@ -236,93 +262,93 @@ export const EventsProvider = (props) => {
         setAttendeeEvent(updatedAttendeeEvent);
         fetchEvents();
         addToast(`Response added to ${attendeeEvent.formConfig.title}`, {
-          appearance: "success",
+          appearance: 'success',
         });
       } catch (err) {
         console.log(err);
         setError(err);
         addToast(`Error: Failed to update ${attendeeEvent.formConfig.title}`, {
-          appearance: "error",
+          appearance: 'error',
         });
       }
     },
-    [addToast, setError, setLoading, setAttendeeEvent, fetchEvents, state]
+    [addToast, setError, setLoading, setAttendeeEvent, fetchEvents, state],
   );
 
-    const updateEvent = useCallback(
-      async (id, updates) => {
-        // console.log('updates event context', updates)
-        if(!accessToken) return;
-        let newEvent = null;
-        setLoading();
-        const { events } = state;
-        try {
-          const response = await fetch(`/api/v1/events/${id}`, {
-            method: "PUT",
-            headers: accessToken
-              ? { ...headers, Authorization: `Bearer ${accessToken}` }
-              : headers,
-            body: JSON.stringify(updates),
-          });
-          if (!response.ok) {
-            throw response;
-          }
-          // Get index
-          const index = events.findIndex((event) => event._id === id);
-  
-          // Get actual event
-          const oldEvent = events[index];
-          // console.log(
-          //   "🚀 ~ file: events.context.js ~ line 95 ~ updateEvent ~ oldEvent",
-          //   oldEvent
-          // );
-  
-          // Merge with updates
-          newEvent = {
-            ...oldEvent,
-            formConfig: {
-              ...oldEvent.formConfig,
-              ...updates,
-            },
-          };
-          // console.log(
-          //   "🚀 ~ file: events.context.js ~ line 99 ~ updateEventt ~ newEventt",
-          //   newEvent
-          // );
-          // recreate the events array
-          const updatedEvents = [
-            ...events.slice(0, index),
-            newEvent,
-            ...events.slice(index + 1),
-          ];
-          // console.log(
-          //   "🚀 ~ file: event.context.js ~ line 120 ~ updatedEvents",
-          //   updatedEvents
-          // );
-          setEvents(updatedEvents);
-          addToast(`Updated ${newEvent.formConfig.title}`, {
-            appearance: "success",
-          });
-        } catch (err) {
-          console.log(err);
-          setError(err);
-          addToast(`Error: Failed to update ${newEvent.formConfig.title}`, {
-            appearance: "error",
-          });
+  const updateEvent = useCallback(
+    async (id, updates) => {
+      // console.log('updates event context', updates)
+      if (!accessToken) return;
+      let newEvent = null;
+      setLoading();
+      const { events } = state;
+      try {
+        const response = await fetch(`/api/v1/events/${id}`, {
+          method: 'PUT',
+          headers: accessToken
+            ? { ...headers, Authorization: `Bearer ${accessToken}` }
+            : headers,
+          body: JSON.stringify(updates),
+        });
+        if (!response.ok) {
+          throw response;
         }
-      },
-      [accessToken, addToast, setError, setLoading, setEvents, state]
-    );
+        // Get index
+        const index = events.findIndex((event) => event._id === id);
+
+        // Get actual event
+        const oldEvent = events[index];
+        // console.log(
+        //   "🚀 ~ file: events.context.js ~ line 95 ~ updateEvent ~ oldEvent",
+        //   oldEvent
+        // );
+
+        // Merge with updates
+        newEvent = {
+          ...oldEvent,
+          formConfig: {
+            ...oldEvent.formConfig,
+            ...updates,
+          },
+        };
+        // console.log(
+        //   "🚀 ~ file: events.context.js ~ line 99 ~ updateEventt ~ newEventt",
+        //   newEvent
+        // );
+        // recreate the events array
+        const updatedEvents = [
+          ...events.slice(0, index),
+          newEvent,
+          ...events.slice(index + 1),
+        ];
+        // console.log(
+        //   "🚀 ~ file: event.context.js ~ line 120 ~ updatedEvents",
+        //   updatedEvents
+        // );
+        setEvents(updatedEvents);
+        addToast(`Updated ${newEvent.formConfig.title}`, {
+          appearance: 'success',
+        });
+      } catch (err) {
+        console.log(err);
+        setError(err);
+        addToast(`Error: Failed to update ${newEvent.formConfig.title}`, {
+          appearance: 'error',
+        });
+      }
+    },
+    [accessToken, addToast, setError, setLoading, setEvents, state],
+  );
 
   const deleteEvent = useCallback(
     async (id) => {
-      if(!accessToken) return;
+      if (!accessToken) return;
       let deletedEvent = null;
       setLoading();
       const { events } = state;
       try {
         const response = await fetch(`/api/v1/events/${id}`, {
-          method: "DELETE",
+          method: 'DELETE',
           headers: accessToken
             ? { ...headers, Authorization: `Bearer ${accessToken}` }
             : headers,
@@ -340,20 +366,18 @@ export const EventsProvider = (props) => {
         ];
         setEvents(updatedEvents);
         addToast(`Deleted ${deletedEvent.formConfig.title}`, {
-          appearance: "success",
+          appearance: 'success',
         });
       } catch (err) {
         console.log(err);
         setError(err);
         addToast(`Error: Failed to update ${deletedEvent.formConfig.title}`, {
-          appearance: "error",
+          appearance: 'error',
         });
       }
     },
-    [accessToken, addToast, setError, setLoading, setEvents, state]
+    [accessToken, addToast, setError, setLoading, setEvents, state],
   );
-
-  
 
   return (
     <EventsContext.Provider

@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect } from "react";
 // import { useToasts } from "react-toast-notifications";
 import { useAuth0 } from "@auth0/auth0-react";
 // import cloneDeep from 'lodash.cloneDeep' <-- use if your objects get complex
-const domain = window.location.host;
+// const domain = window.location.host;
 
 export const AuthContext = createContext({
   token: null,
@@ -33,7 +33,7 @@ export const AuthProvider = (props) => {
   useEffect(() => {
     // console.log("AT", accessToken);
     const getToken = async () => {
-      console.log("getting AT", `http://${domain}/api/v1`);
+      // console.log("getting AT", `http://${domain}/api/v1`);
       try {
         const Acctoken = await getAccessTokenSilently();
         // console.log("GOT AT", Acctoken);

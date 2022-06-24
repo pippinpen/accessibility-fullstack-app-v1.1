@@ -87,7 +87,7 @@ function ResponseOptions({ event, id }) {
     setResponseForm(updatedState);
   };
 
-  const onSubmit = async (formValues) => {
+  const onSubmit = (formValues) => {
     const updatedState = {
       ...responseForm,
       formAnswers: {
@@ -95,12 +95,9 @@ function ResponseOptions({ event, id }) {
         ...formValues,
       },
     };
-    setResponseForm(updatedState);
-    updateAttendeeResponse(id, responseForm.formAnswers);
+    updateAttendeeResponse(id, updatedState.formAnswers);
     routeChange();
   };
-
-  // console.log(responseForm);
 
   if (!event) {
     return <p>Couldn't find the event with that ID</p>;
@@ -200,7 +197,10 @@ function ResponseOptions({ event, id }) {
           buttonText="Finish"
         />
       )}
-      <ProgressBar step={responseForm.step} totalSteps={responseForm.totalSteps}/>
+      <ProgressBar
+        step={responseForm.step}
+        totalSteps={responseForm.totalSteps}
+      />
     </div>
   );
 }
