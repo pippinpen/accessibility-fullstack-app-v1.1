@@ -6,6 +6,7 @@ const theme = createTheme({
   typography: {
     fontFamily: 'Inter, sans-serif',
     color: '#000000',
+    fontSize: 22,
   },
   palette: {
     primary: {

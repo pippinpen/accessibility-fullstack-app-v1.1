@@ -1,9 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import { EventsContext } from "../../contexts/events.context";
-// import { makeStyles } from "@material-ui/core/styles";
 import { IconButton } from "@material-ui/core";
 import { DeleteForever, Edit } from "@material-ui/icons"
-// import ViewFormButton from "../ViewFormButton.jsx/ViewFormButton";
 import { Link } from "react-router-dom";
 import dateFormat from "./../../utils/dateFormat"; 
 import Button from "../Button/Button";
@@ -40,7 +38,6 @@ function EventsDisplay() {
     useContext(EventsContext);
 
   useEffect(() => {
-    // console.log("in useEffect", events, loaded, loading);
     
     if (!loading && !loaded) {
       fetchEvents();
@@ -56,15 +53,13 @@ function EventsDisplay() {
   return(
     <>
     <h2 className="eventDisplayTitle">Your Events</h2>
-    <ul
-    // className={classes.eventList}
-    className="eventList"
+    <ul className="eventList"
     >
       {events.map(({ _id, formConfig: { title, date } }) => (
       <li key={_id} className="eventItems">
       <h3>{title}</h3>
       <p>{dateFormat(date)}</p>
-      <p>ID for attendees: {_id}</p>
+      <p onClick={() => navigator.clipboard.writeText(_id)}>Copy code for attendees: <span tabIndex="0" className="copyLink">{_id}</span></p>
       <div className="eventButtons">
         <IconButton
         aria-label="update"

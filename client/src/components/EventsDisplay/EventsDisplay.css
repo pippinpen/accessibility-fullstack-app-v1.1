@@ -10,16 +10,35 @@
 }
 
 .eventItems>h3,
-.eventItems>p:nth-of-type(1) {
+.eventItems>p {
   text-align: center;
 }
 
 .eventButtons {
+  padding-block-start: 10px;
   padding-block-end: 50px;
   text-align: center;
   display: flex;
   justify-content: center;
 }
+
+
+.copyLink {
+  cursor: pointer;
+  color:hsl(166, 100%, 23%);
+  padding: 5px;
+  text-decoration: underline;
+  border-radius: 25px;
+}
+
+.copyLink:hover {
+  background-color: hsl(132, 100%, 86%);
+  }
+
+  .copyLink:focus {
+  background-color: hsl(132, 100%, 86%);
+  outline: 5px solid hsl(25, 100%, 50%);
+  }
 
 @media (min-width: 600px) {
   .eventList {
@@ -27,6 +46,10 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 20px
   }
+  /* .codeContainer {
+    flex-direction: row;
+    gap: 5px;
+  } */
 }
 
 @media (min-width: 1000px) {

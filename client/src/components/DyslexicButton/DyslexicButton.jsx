@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './DyslexicButton.css';
 
 function DyslexicButton() {
+  let [ dyslexicFontOn, setDyslexicFontOn ] = useState(false);
+  let options;
+  dyslexicFontOn ? options = "dyslexicButton dyslexicFontOn" : options = "dyslexicButton"
+  // console.log(dyslexicFontOn);
   return (
-    <button className="dyslexicButton">Dyslexic Font</button>
+    <button className={options} onClick={() => {setDyslexicFontOn(!dyslexicFontOn)}}>Dyslexic Font</button>
   )
 }
 

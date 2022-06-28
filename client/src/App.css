@@ -19,7 +19,20 @@ body {
   }
 }
 
+/* High Contrast Mode/Dyslexic Font CSS in development */
+/* .contrastOn {
+  color: red !important;
+}
+
+.dyslexicFontOn {
+  color: red !important;
+} */
+
 /* General Font CSS */
+
+/* .MuiTypography-body1 {
+  font-size: 1.5rem;
+} */
 
 h1 {
   font-size: 2.2rem;
